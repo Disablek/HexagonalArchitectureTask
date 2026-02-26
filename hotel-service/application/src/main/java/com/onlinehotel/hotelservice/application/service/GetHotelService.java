@@ -1,7 +1,7 @@
 package com.onlinehotel.hotelservice.application.service;
 
 import com.onlinehotel.hotelservice.application.port.in.hotel.GetHotelUseCase;
-import com.onlinehotel.hotelservice.application.port.out.persistence.HotelPort;
+import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRepositoryPort;
 import com.onlinehotel.hotelservice.exception.InvalidArgumentException;
 import com.onlinehotel.hotelservice.model.Hotel;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import java.util.Optional;
 @Service
 @Transactional
 public class GetHotelService implements GetHotelUseCase {
-    private final HotelPort hotelPort;
+    private final HotelRepositoryPort hotelRepositoryPort;
 
-    public GetHotelService(HotelPort hotelPort) {
-        this.hotelPort = hotelPort;
+    public GetHotelService(HotelRepositoryPort hotelRepositoryPort) {
+        this.hotelRepositoryPort = hotelRepositoryPort;
     }
 
     @Override
@@ -23,6 +23,6 @@ public class GetHotelService implements GetHotelUseCase {
         if (id == null) {
             throw new InvalidArgumentException("id is null", "id");
         }
-        return hotelPort.findById(id);
+        return hotelRepositoryPort.findById(id);
     }
 }

@@ -1,7 +1,7 @@
 package com.onlinehotel.hotelservice.application.service;
 
 import com.onlinehotel.hotelservice.application.port.in.hotel.UpdateHotelUseCase;
-import com.onlinehotel.hotelservice.application.port.out.persistence.HotelPort;
+import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRepositoryPort;
 import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
 import com.onlinehotel.hotelservice.model.Hotel;
 import org.springframework.stereotype.Service;
@@ -10,15 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UpdateHotelService implements UpdateHotelUseCase {
-    private final HotelPort hotelPort;
+    private final HotelRepositoryPort hotelRepositoryPort;
 
-    public UpdateHotelService(HotelPort hotelPort) {
-        this.hotelPort = hotelPort;
+    public UpdateHotelService(HotelRepositoryPort hotelRepositoryPort) {
+        this.hotelRepositoryPort = hotelRepositoryPort;
     }
 
     @Override
     public Hotel execute(UpdateHotelCommand command) throws HotelNotFoundException {
-        Hotel hotel = hotelPort.findById(command.hotelId()).orElseThrow(() ->
+        Hotel hotel = hotelRepositoryPort.findById(command.hotelId()).orElseThrow(() ->
                 new HotelNotFoundException("Hotel not found with id: " + command.hotelId()));
 
         return updatePartially(hotel, command);

@@ -4,7 +4,7 @@ import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
 import com.onlinehotel.hotelservice.exception.InvalidArgumentException;
 import com.onlinehotel.hotelservice.model.Hotel;
 import com.onlinehotel.hotelservice.application.port.in.hotel.CreateHotelUseCase;
-import com.onlinehotel.hotelservice.application.port.out.persistence.HotelPort;
+import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRepositoryPort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CreateHotelService implements CreateHotelUseCase {
 
-    private final HotelPort hotelRepository;
+    private final HotelRepositoryPort hotelRepository;
 
-    public CreateHotelService(HotelPort hotelRepository) {
+    public CreateHotelService(HotelRepositoryPort hotelRepository) {
         this.hotelRepository = hotelRepository;
     }
 

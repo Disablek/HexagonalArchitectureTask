@@ -6,7 +6,7 @@ import com.onlinehotel.hotelservice.model.HotelRoom;
 import java.util.Optional;
 import java.util.Set;
 
-public interface HotelPort {
+public interface HotelRepositoryPort {
     Optional<Hotel> findById(Long id);
 
     Hotel save(Hotel hotel);
@@ -14,6 +14,4 @@ public interface HotelPort {
     void deleteById(Long id);
 
     Set<Hotel> findAll();
-
-    Set<HotelRoom> findRoomsByHotelId(Long hotelId);
 }
