@@ -1,7 +1,6 @@
 package com.onlinehotel.hotelservice.application.port.out.persistence;
 
 import com.onlinehotel.hotelservice.model.Hotel;
-import com.onlinehotel.hotelservice.model.HotelRoom;
 
 import java.util.Optional;
 import java.util.Set;

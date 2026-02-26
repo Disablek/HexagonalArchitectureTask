@@ -1,4 +1,4 @@
-package com.onlinehotel.hotelservice.application.service;
+package com.onlinehotel.hotelservice.application.service.hotel;
 
 import com.onlinehotel.hotelservice.application.port.in.hotel.UpdateHotelUseCase;
 import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRepositoryPort;

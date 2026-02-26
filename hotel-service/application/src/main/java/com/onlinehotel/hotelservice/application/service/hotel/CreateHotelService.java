@@ -1,4 +1,4 @@
-package com.onlinehotel.hotelservice.application.service;
+package com.onlinehotel.hotelservice.application.service.hotel;
 
 import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
 import com.onlinehotel.hotelservice.exception.InvalidArgumentException;
@@ -22,12 +22,10 @@ public class CreateHotelService implements CreateHotelUseCase {
     public Hotel execute(CreateHotelCommand command) throws HotelNotFoundException {
         validateHotelCreation(command);
 
-        Hotel hotel = new Hotel(
-                null,
-                command.hotelName(),
-                command.hotelAddress(),
-                null
-        );
+        Hotel hotel = Hotel.builder()
+                .name(command.hotelName())
+                .address(command.hotelAddress())
+                .build();
 
         return hotelRepository.save(hotel);
     }
