@@ -24,7 +24,7 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder()
                 .group("hotels")
                 .pathsToMatch("/api/hotel/**")
-                .packagesToScan("com.onlinehotel.hotelservice.in.web")  // Your controller package
+                .packagesToScan("com.onlinehotel.hotelservice.in.web")
                 .build();
     }
 }

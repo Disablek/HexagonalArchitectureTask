@@ -17,20 +17,23 @@ public class UpdateHotelService implements UpdateHotelUseCase {
     }
 
     @Override
-    public Hotel execute(Long id,UpdateHotelCommand command) throws HotelNotFoundException {
-        Hotel hotel = hotelRepositoryPort.findById(id).orElseThrow(() ->
-                new HotelNotFoundException("Hotel not found with id: " + id));
+    public Hotel execute(Long id, UpdateHotelCommand command) throws HotelNotFoundException {
+        Hotel hotel = hotelRepositoryPort.findById(id)
+                .orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + id));
 
-        return updatePartially(hotel, command);
+        updatePartially(hotel, command);
+        return hotelRepositoryPort.save(hotel);
     }
 
-
-    public Hotel updatePartially(Hotel hotel, UpdateHotelCommand cmd) {
-        return new Hotel(
-                hotel.id(),
-                cmd.name().orElse(hotel.name()),
-                cmd.address().orElse(hotel.address()),
-                cmd.hotelRoom().orElse(hotel.rooms())
-        );
+    private void updatePartially(Hotel hotel, UpdateHotelCommand cmd) {
+        if (cmd.name().isPresent()) {
+            hotel.setName(cmd.name().get());
+        }
+        if (cmd.address().isPresent()) {
+            hotel.setAddress(cmd.address().get());
+        }
+        if (cmd.hotelRoom().isPresent()) {
+            hotel.setRooms(cmd.hotelRoom().get());
+        }
     }
 }

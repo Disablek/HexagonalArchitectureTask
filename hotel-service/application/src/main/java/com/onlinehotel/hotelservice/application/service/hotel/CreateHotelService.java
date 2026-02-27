@@ -23,10 +23,9 @@ public class CreateHotelService implements CreateHotelUseCase {
     public Hotel execute(CreateHotelCommand command) throws HotelNotFoundException {
         validateHotelCreation(command);
 
-        Hotel hotel = Hotel.builder()
-                .name(command.hotelName())
-                .address(command.hotelAddress())
-                .build();
+        Hotel hotel = new Hotel(
+                command.hotelName(),
+                command.hotelAddress());
 
         return hotelRepository.save(hotel);
     }

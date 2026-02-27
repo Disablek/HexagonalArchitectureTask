@@ -30,12 +30,11 @@ public class HotelController {
     private final UpdateHotelUseCase updateHotelUseCase;
 
     @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     @Operation(
             description = "Get test by test-id",
             summary = "Get test summary"
     )
-    public ResponseEntity<Hotel> updateHotel(@NotNull @PathVariable Long id,
+    public ResponseEntity<Hotel> updateHotel(@NotNull @PathVariable("id") Long id,
                                              @Valid @RequestBody UpdateHotelUseCase.UpdateHotelCommand command)
             throws HotelNotFoundException {
         Hotel updatedHotel = updateHotelUseCase.execute(id ,command);
@@ -43,30 +42,27 @@ public class HotelController {
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     @Operation(
-            description = "Get test by test-id",
-            summary = "Get test summary"
+            description = "Get hotel by hotel-id",
+            summary = "Get hotel parameters"
     )
-    public ResponseEntity<Hotel> getHotelById(@NotNull @PathVariable Long id) throws HotelNotFoundException {
+    public ResponseEntity<Hotel> getHotelById(@NotNull  @PathVariable("id") Long id) throws HotelNotFoundException {
         Hotel hotel = getHotelUseCase.execute(id)
                 .orElseThrow(() -> new HotelNotFoundException("User with id " + id + " not found"));
         return ResponseEntity.ok().body(hotel);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(
-            description = "Get test by test-id",
-            summary = "Get test summary"
+            description = "Delete hotel by hotel-id (HotelRoom - cascadeType)",
+            summary = "Delete hotel"
     )
-    public ResponseEntity<?> deleteHotel(@NotNull @PathVariable Long id) throws HotelNotFoundException {
+    public ResponseEntity<?> deleteHotel(@NotNull @PathVariable("id") Long id) throws HotelNotFoundException {
         deleteHotelUseCase.execute(id);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create new hotel")
     public ResponseEntity<Hotel> createHotel(@Valid @RequestBody CreateHotelRequest request) throws HotelAlreadyExists {
         CreateHotelUseCase.CreateHotelCommand command =

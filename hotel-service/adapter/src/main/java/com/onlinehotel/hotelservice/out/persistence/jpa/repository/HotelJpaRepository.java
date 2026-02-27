@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface HotelJpaRepository extends JpaRepository<HotelJpaEntity, Long> {
     Optional<HotelJpaEntity> getHotelJpaEntityById(Long id);
+
 }

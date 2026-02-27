@@ -27,7 +27,7 @@ public class JpaHotelAdapter implements HotelRepositoryPort {
     }
 
     @Override
-    public Hotel save(Hotel hotel) {
+    public Hotel save(Hotel hotel)  {
 
         HotelJpaEntity entity = hotelMapper.toJpaEntity(hotel);
         HotelJpaEntity savedEntity = hotelJpaRepository.save(entity);
