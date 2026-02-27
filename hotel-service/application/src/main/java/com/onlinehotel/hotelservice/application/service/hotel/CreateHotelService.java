@@ -5,6 +5,7 @@ import com.onlinehotel.hotelservice.exception.InvalidArgumentException;
 import com.onlinehotel.hotelservice.model.Hotel;
 import com.onlinehotel.hotelservice.application.port.in.hotel.CreateHotelUseCase;
 import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRepositoryPort;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

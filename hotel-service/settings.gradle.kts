@@ -1,5 +1,5 @@
 rootProject.name = "hotel-service"
-include("application")
 include("model")
 include("adapter")
+include("application")
 include("bootstrap")

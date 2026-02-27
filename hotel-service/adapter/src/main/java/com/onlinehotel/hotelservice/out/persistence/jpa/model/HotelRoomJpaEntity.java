@@ -1,11 +1,10 @@
 package com.onlinehotel.hotelservice.out.persistence.jpa.model;
 
-import com.onlinehotel.hotelservice.model.Hotel;
 import com.onlinehotel.hotelservice.model.RoomType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 

@@ -2,7 +2,7 @@ package com.onlinehotel.hotelservice.out.persistence.jpa.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;

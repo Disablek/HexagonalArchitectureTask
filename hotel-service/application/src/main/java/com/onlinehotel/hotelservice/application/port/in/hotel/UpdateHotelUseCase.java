@@ -8,10 +8,9 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface UpdateHotelUseCase {
-    Hotel execute(UpdateHotelCommand command) throws HotelNotFoundException;
+    Hotel execute(Long id ,UpdateHotelCommand command) throws HotelNotFoundException;
 
     record UpdateHotelCommand(
-            Long hotelId,
             Optional<String> name,
             Optional<String> address,
             Optional<Set<HotelRoom>> hotelRoom) {

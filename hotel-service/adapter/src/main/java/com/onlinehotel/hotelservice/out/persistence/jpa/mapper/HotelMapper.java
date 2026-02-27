@@ -20,9 +20,11 @@ public interface HotelMapper {
     @IterableMapping(qualifiedByName = "toDomain")
     Set<Hotel> toDomainSet(Set<HotelJpaEntity> domain);
 
+    @Named("toJpaEntity")
     @Mapping(target = "rooms", source = "rooms", qualifiedByName = "toJpaRooms")
     HotelJpaEntity toJpaEntity(Hotel domain);
 
+    @Named("toDomain")
     @Mapping(target = "rooms", source = "rooms", qualifiedByName = "toDomainRooms")
     Hotel toDomain(HotelJpaEntity jpa);
 }

@@ -7,6 +7,8 @@ import com.onlinehotel.hotelservice.application.port.in.hotel.UpdateHotelUseCase
 import com.onlinehotel.hotelservice.exception.HotelAlreadyExists;
 import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
 import com.onlinehotel.hotelservice.model.Hotel;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/hotel")
+@RequestMapping("api/hotel")
+@Tag(name = "Hotels", description = "Hotel management operations")
 @AllArgsConstructor
 public class HotelController {
 
@@ -28,14 +31,23 @@ public class HotelController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Hotel> updateHotel(@NotNull @PathVariable Long id,@Valid @RequestBody Hotel hotel) throws HotelNotFoundException {
-        // TODO: Замапить id и hotel в command
-        Hotel updatedHotel = updateHotelUseCase.execute(id, hotel);
+    @Operation(
+            description = "Get test by test-id",
+            summary = "Get test summary"
+    )
+    public ResponseEntity<Hotel> updateHotel(@NotNull @PathVariable Long id,
+                                             @Valid @RequestBody UpdateHotelUseCase.UpdateHotelCommand command)
+            throws HotelNotFoundException {
+        Hotel updatedHotel = updateHotelUseCase.execute(id ,command);
         return ResponseEntity.ok(updatedHotel);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(
+            description = "Get test by test-id",
+            summary = "Get test summary"
+    )
     public ResponseEntity<Hotel> getHotelById(@NotNull @PathVariable Long id) throws HotelNotFoundException {
         Hotel hotel = getHotelUseCase.execute(id)
                 .orElseThrow(() -> new HotelNotFoundException("User with id " + id + " not found"));
@@ -44,6 +56,10 @@ public class HotelController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(
+            description = "Get test by test-id",
+            summary = "Get test summary"
+    )
     public ResponseEntity<?> deleteHotel(@NotNull @PathVariable Long id) throws HotelNotFoundException {
         deleteHotelUseCase.execute(id);
         return ResponseEntity.ok().build();
@@ -51,6 +67,7 @@ public class HotelController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create new hotel")
     public ResponseEntity<Hotel> createHotel(@Valid @RequestBody CreateHotelRequest request) throws HotelAlreadyExists {
         CreateHotelUseCase.CreateHotelCommand command =
                 new CreateHotelUseCase.CreateHotelCommand(request.getHotelName(),  request.getHotelAddress());

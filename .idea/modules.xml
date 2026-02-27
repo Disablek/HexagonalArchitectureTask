@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HexagonalArchitecture.iml" filepath="$PROJECT_DIR$/HexagonalArchitecture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/hotel-service.adapter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/hotel-service.adapter.main.iml" />
     </modules>
   </component>
 </project>

@@ -6,21 +6,18 @@ import com.onlinehotel.hotelservice.model.Hotel;
 import com.onlinehotel.hotelservice.out.persistence.jpa.mapper.HotelMapper;
 import com.onlinehotel.hotelservice.out.persistence.jpa.model.HotelJpaEntity;
 import com.onlinehotel.hotelservice.out.persistence.jpa.repository.HotelJpaRepository;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-@Component
-public class HotelPersistenceAdapter implements HotelRepositoryPort {
+@Repository
+@AllArgsConstructor
+public class JpaHotelAdapter implements HotelRepositoryPort {
     private final HotelJpaRepository hotelJpaRepository;
     private final HotelMapper hotelMapper;
-
-    public HotelPersistenceAdapter(HotelJpaRepository hotelJpaRepository, HotelMapper hotelMapper) {
-        this.hotelJpaRepository = hotelJpaRepository;
-        this.hotelMapper = hotelMapper;
-    }
 
     @Override
     public Optional<Hotel> findById(Long id) throws HotelNotFoundException {
