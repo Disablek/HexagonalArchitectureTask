@@ -1,6 +1,6 @@
 package com.onlinehotel.hotelservice.application.service.hotel;
 
-import com.onlinehotel.hotelservice.application.port.in.hotel.GetHotelUseCase;
+import com.onlinehotel.hotelservice.application.port.in.hotel.GetHotelByIdUseCase;
 import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRepositoryPort;
 import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
 import com.onlinehotel.hotelservice.exception.InvalidArgumentException;
@@ -12,10 +12,10 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class GetHotelService implements GetHotelUseCase {
+public class GetHotelByIdService implements GetHotelByIdUseCase {
     private final HotelRepositoryPort hotelRepositoryPort;
 
-    public GetHotelService(HotelRepositoryPort hotelRepositoryPort) {
+    public GetHotelByIdService(HotelRepositoryPort hotelRepositoryPort) {
         this.hotelRepositoryPort = hotelRepositoryPort;
     }
 

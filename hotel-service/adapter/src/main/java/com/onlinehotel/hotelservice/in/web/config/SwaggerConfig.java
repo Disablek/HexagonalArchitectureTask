@@ -22,8 +22,16 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi hotelApi() {
         return GroupedOpenApi.builder()
-                .group("hotels")
+                .group("hotel-service")
                 .pathsToMatch("/api/hotel/**")
+                .packagesToScan("com.onlinehotel.hotelservice.in.web")
+                .build();
+    }
+    @Bean
+    public GroupedOpenApi hotelRoomApi() {
+        return GroupedOpenApi.builder()
+                .group("hotel-service")
+                .pathsToMatch("/api/hotelRoom/**")
                 .packagesToScan("com.onlinehotel.hotelservice.in.web")
                 .build();
     }

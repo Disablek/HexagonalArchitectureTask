@@ -1,12 +1,10 @@
 package com.onlinehotel.hotelservice.in.web;
 
-import com.onlinehotel.hotelservice.application.port.in.hotel.CreateHotelUseCase;
-import com.onlinehotel.hotelservice.application.port.in.hotel.DeleteHotelUseCase;
-import com.onlinehotel.hotelservice.application.port.in.hotel.GetHotelUseCase;
-import com.onlinehotel.hotelservice.application.port.in.hotel.UpdateHotelUseCase;
+import com.onlinehotel.hotelservice.application.port.in.hotel.*;
 import com.onlinehotel.hotelservice.exception.HotelAlreadyExists;
 import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
 import com.onlinehotel.hotelservice.model.Hotel;
+import com.onlinehotel.hotelservice.out.persistence.jpa.mapper.HotelMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -18,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("api/hotel")
 @Tag(name = "Hotels", description = "Hotel management operations")
@@ -26,19 +26,19 @@ public class HotelController {
 
     private final CreateHotelUseCase createHotelUseCase;
     private final DeleteHotelUseCase deleteHotelUseCase;
-    private final GetHotelUseCase getHotelUseCase;
+    private final GetHotelByIdUseCase getHotelByIdUseCase;
     private final UpdateHotelUseCase updateHotelUseCase;
+    private final GetAllHotelsUseCase getAllHotelsUseCase;
+    private final HotelMapper hotelMapper;
 
-    @PatchMapping("/{id}")
+    @GetMapping
     @Operation(
-            description = "Get test by test-id",
-            summary = "Get test summary"
+            description = "Get all hotels",
+            summary = "Get all hotels parameters"
     )
-    public ResponseEntity<Hotel> updateHotel(@NotNull @PathVariable("id") Long id,
-                                             @Valid @RequestBody UpdateHotelUseCase.UpdateHotelCommand command)
-            throws HotelNotFoundException {
-        Hotel updatedHotel = updateHotelUseCase.execute(id ,command);
-        return ResponseEntity.ok(updatedHotel);
+    public ResponseEntity<Set<Hotel>> getAllHotels(){
+        Set<Hotel> hotels = this.getAllHotelsUseCase.execute();
+        return new ResponseEntity<>(hotels, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -47,9 +47,21 @@ public class HotelController {
             summary = "Get hotel parameters"
     )
     public ResponseEntity<Hotel> getHotelById(@NotNull  @PathVariable("id") Long id) throws HotelNotFoundException {
-        Hotel hotel = getHotelUseCase.execute(id)
+        Hotel hotel = getHotelByIdUseCase.execute(id)
                 .orElseThrow(() -> new HotelNotFoundException("User with id " + id + " not found"));
         return ResponseEntity.ok().body(hotel);
+    }
+
+    @PatchMapping("/{id}")
+    @Operation(
+            description = "Patch hotel by hotel-id",
+            summary = "Patch hotel parameters"
+    )
+    public ResponseEntity<Hotel> updateHotel(@NotNull @PathVariable("id") Long id,
+                                             @Valid @RequestBody UpdateHotelUseCase.UpdateHotelCommand command)
+            throws HotelNotFoundException {
+        Hotel updatedHotel = updateHotelUseCase.execute(id ,command);
+        return ResponseEntity.ok(updatedHotel);
     }
 
     @DeleteMapping("/{id}")
@@ -65,9 +77,7 @@ public class HotelController {
     @PostMapping
     @Operation(summary = "Create new hotel")
     public ResponseEntity<Hotel> createHotel(@Valid @RequestBody CreateHotelRequest request) throws HotelAlreadyExists {
-        CreateHotelUseCase.CreateHotelCommand command =
-                new CreateHotelUseCase.CreateHotelCommand(request.getHotelName(),  request.getHotelAddress());
-        Hotel createdHotel = createHotelUseCase.execute(command);
+        Hotel createdHotel = createHotelUseCase.execute(hotelMapper.toDomain(request));
         return ResponseEntity.status(HttpStatus.CREATED).body(createdHotel);
     }
 

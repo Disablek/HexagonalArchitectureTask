@@ -1,5 +1,7 @@
 package com.onlinehotel.hotelservice.out.persistence.jpa.mapper;
 
+import com.onlinehotel.hotelservice.application.port.in.hotel.CreateHotelUseCase;
+import com.onlinehotel.hotelservice.in.web.HotelController;
 import com.onlinehotel.hotelservice.model.Hotel;
 import com.onlinehotel.hotelservice.out.persistence.jpa.model.HotelJpaEntity;
 import java.util.LinkedHashSet;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-02-27T16:26:30+0300",
+    date = "2026-03-02T15:27:23+0300",
     comments = "version: 1.6.3, compiler: IncrementalProcessingEnvironment from gradle-language-java-9.3.1.jar, environment: Java 21.0.3 (Oracle Corporation)"
 )
 @Component
@@ -75,6 +77,34 @@ public class HotelMapperImpl implements HotelMapper {
         hotel.setId( jpa.getId() );
         hotel.setName( jpa.getName() );
         hotel.setAddress( jpa.getAddress() );
+
+        return hotel;
+    }
+
+    @Override
+    public HotelJpaEntity toJpaEntity(CreateHotelUseCase.CreateHotelCommand command) {
+        if ( command == null ) {
+            return null;
+        }
+
+        HotelJpaEntity hotelJpaEntity = new HotelJpaEntity();
+
+        hotelJpaEntity.setName( command.hotelName() );
+        hotelJpaEntity.setAddress( command.hotelAddress() );
+
+        return hotelJpaEntity;
+    }
+
+    @Override
+    public Hotel toDomain(HotelController.CreateHotelRequest createHotelRequest) {
+        if ( createHotelRequest == null ) {
+            return null;
+        }
+
+        Hotel hotel = new Hotel();
+
+        hotel.setName( createHotelRequest.getHotelName() );
+        hotel.setAddress( createHotelRequest.getHotelAddress() );
 
         return hotel;
     }

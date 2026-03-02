@@ -13,4 +13,6 @@ public interface HotelRoomRepositoryPort {
     void deleteById(Long id);
 
     Set<HotelRoom> findAllByHotelId(Long hotelId);
+
+    Set<HotelRoom> findAll();
 }

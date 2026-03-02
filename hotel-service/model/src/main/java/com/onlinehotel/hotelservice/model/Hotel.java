@@ -4,35 +4,35 @@ import java.util.Set;
 
 public class Hotel {
 
-    Long id;
-
     public Hotel(Long id, String name, String address, Set<HotelRoom> rooms) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.rooms = rooms;
     }
+
     public Hotel(String name, String address) {
         this.name = name;
         this.address = address;
     }
-
     public Hotel() {
 
     }
 
-    String name;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    String address;
+    private Long id;
 
-    Set<HotelRoom> rooms;
+    private String name;
+
+    private String address;
+
+    private Set<HotelRoom> rooms;
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -58,8 +58,6 @@ public class Hotel {
     public void setRooms(Set<HotelRoom> rooms) {
         this.rooms = rooms;
     }
-
-
 
     @Override
     public String toString(){

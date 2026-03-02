@@ -36,7 +36,7 @@ public class JpaHotelAdapter implements HotelRepositoryPort {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws HotelNotFoundException {
         hotelMapper.toDomain(hotelJpaRepository.findById(id)
             .orElseThrow(
                     () -> new HotelNotFoundException("Hotel not found with id " + id)

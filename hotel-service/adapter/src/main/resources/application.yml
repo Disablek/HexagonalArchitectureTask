@@ -10,3 +10,4 @@ springdoc:
     try-it-out-enabled: true
   packages-to-scan: "*"
   paths-to-match: "*"
+

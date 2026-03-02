@@ -1,11 +1,9 @@
 package com.onlinehotel.hotelservice.in.web;
 
-import com.onlinehotel.hotelservice.exception.HotelAlreadyExists;
-import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
-import com.onlinehotel.hotelservice.exception.HotelRoomAlreadyExists;
-import com.onlinehotel.hotelservice.exception.HotelRoomNotFoundException;
+import com.onlinehotel.hotelservice.exception.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,6 +12,14 @@ import reactor.core.publisher.Mono;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleUniqueConstraint(DataIntegrityViolationException ex) {
+        if (ex.getMessage().contains("unique_serial_per_hotel")) {
+            throw new DuplicateSerialNumberException("SerialNumber уже существует в этом отеле");
+        }
+        throw ex;
+    }
 
     @ExceptionHandler(HotelAlreadyExists.class)
     public Mono<ResponseEntity<ErrorResponse>> handleHotelAlreadyExists(HotelAlreadyExists ex) {
