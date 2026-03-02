@@ -22,6 +22,6 @@ public class HotelJpaEntity {
     @NotNull
     private String address;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<HotelRoomJpaEntity> rooms = new HashSet<>();
 }

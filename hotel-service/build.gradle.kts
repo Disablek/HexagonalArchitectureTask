@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.Java
+
 plugins {
     java
     id("org.springframework.boot") version "4.0.2" apply false
@@ -41,5 +43,9 @@ subprojects {
     tasks.test {
         useJUnitPlatform()
     }
+    tasks.withType(JavaCompile::class) {
+        options.compilerArgs.add("-parameters")
+    }
 }
+
 

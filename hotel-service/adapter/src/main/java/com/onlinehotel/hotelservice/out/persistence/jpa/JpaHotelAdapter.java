@@ -7,10 +7,10 @@ import com.onlinehotel.hotelservice.out.persistence.jpa.mapper.HotelMapper;
 import com.onlinehotel.hotelservice.out.persistence.jpa.model.HotelJpaEntity;
 import com.onlinehotel.hotelservice.out.persistence.jpa.repository.HotelJpaRepository;
 import lombok.AllArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Repository
@@ -20,11 +20,12 @@ public class JpaHotelAdapter implements HotelRepositoryPort {
     private final HotelMapper hotelMapper;
 
     @Override
-    public Optional<Hotel> findById(Long id) throws HotelNotFoundException {
-        return Optional.of(hotelMapper.toDomain(hotelJpaRepository.findById(id)
-                .orElseThrow(
-                        () -> new HotelNotFoundException("Hotel not found with id " + id))));
+    public Hotel findById(Long id) throws HotelNotFoundException {
+        HotelJpaEntity entity = hotelJpaRepository.findById(id)
+                .orElseThrow(() -> new HotelNotFoundException("Hotel not found"));
+        return hotelMapper.toDomain(entity);
     }
+
 
     @Override
     public Hotel save(Hotel hotel)  {

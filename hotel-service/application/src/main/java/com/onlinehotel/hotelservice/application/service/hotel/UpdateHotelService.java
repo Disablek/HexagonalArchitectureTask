@@ -4,6 +4,7 @@ import com.onlinehotel.hotelservice.application.port.in.hotel.UpdateHotelUseCase
 import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRepositoryPort;
 import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
 import com.onlinehotel.hotelservice.model.Hotel;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +18,9 @@ public class UpdateHotelService implements UpdateHotelUseCase {
     }
 
     @Override
+    @CachePut(value = "HotelCache", key = "#id")
     public Hotel execute(Long id, UpdateHotelCommand command) throws HotelNotFoundException {
-        Hotel hotel = hotelRepositoryPort.findById(id)
-                .orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + id));
+        Hotel hotel = hotelRepositoryPort.findById(id);
         updatePartially(hotel, command);
         return hotelRepositoryPort.save(hotel);
     }

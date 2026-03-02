@@ -11,3 +11,5 @@ springdoc:
   packages-to-scan: "*"
   paths-to-match: "*"
 
+
+

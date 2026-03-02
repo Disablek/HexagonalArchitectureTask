@@ -5,6 +5,10 @@ import com.onlinehotel.hotelservice.application.port.out.persistence.HotelReposi
 import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
 import com.onlinehotel.hotelservice.exception.InvalidArgumentException;
 import com.onlinehotel.hotelservice.model.Hotel;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +24,13 @@ public class GetHotelByIdService implements GetHotelByIdUseCase {
     }
 
     @Override
-    public Optional<Hotel> execute(Long id) throws HotelNotFoundException {
-        if (id == null) {
+    @Cacheable(value = "hotelCache", key = "#hotelId")
+    @Transactional(readOnly = true)
+    public Hotel execute(Long hotelId) throws HotelNotFoundException {
+        if (hotelId == null) {
             throw new InvalidArgumentException("id is null", "id");
         }
-        return hotelRepositoryPort.findById(id);
+        System.out.println("hotelId: " + hotelId);
+        return hotelRepositoryPort.findById(hotelId);
     }
 }

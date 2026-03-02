@@ -13,20 +13,19 @@
         <module name="hotel-service.adapter.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="hotel-service.ports" target="21" />
-      <module name="hotel-service.ports.main" target="21" />
-      <module name="hotel-service.ports.test" target="21" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-parameters" />
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="api-gateway.main" options="-parameters" />
       <module name="api-gateway.test" options="-parameters" />
-      <module name="hotel-service.bootstrap" options="-parameters" />
-      <module name="hotel-service.bootstrap.main" options="-parameters" />
-      <module name="hotel-service.bootstrap.test" options="-parameters" />
+      <module name="hotel-service" options="" />
+      <module name="hotel-service.bootstrap" options="-parameters -parameters" />
+      <module name="hotel-service.bootstrap.main" options="-parameters -parameters" />
+      <module name="hotel-service.bootstrap.test" options="-parameters -parameters" />
+      <module name="hotel-service.main" options="" />
+      <module name="hotel-service.test" options="" />
       <module name="service-registry" options="-parameters" />
       <module name="service-registry.main" options="-parameters" />
       <module name="service-registry.test" options="-parameters" />

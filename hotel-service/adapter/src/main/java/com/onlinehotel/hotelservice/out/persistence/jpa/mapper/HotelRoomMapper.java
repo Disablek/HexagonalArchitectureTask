@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface HotelRoomMapper {
-    // TODO : маппер для createHotelCommand?
     @Named("toJpaRooms")
     @IterableMapping(qualifiedByName = "toJpaRoom")
     Set<HotelRoomJpaEntity> roomsToJpa(Set<HotelRoom> rooms);

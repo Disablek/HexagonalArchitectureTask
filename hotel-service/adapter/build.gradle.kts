@@ -18,6 +18,7 @@ dependencyManagement {
 dependencies {
     implementation("org.projectlombok:lombok")
     implementation("org.mapstruct:mapstruct:1.6.3")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor ("org.mapstruct:mapstruct-processor:1.6.3")

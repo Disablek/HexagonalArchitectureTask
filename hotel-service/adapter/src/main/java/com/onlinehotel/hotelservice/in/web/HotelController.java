@@ -15,6 +15,7 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.Set;
 
@@ -46,10 +47,10 @@ public class HotelController {
             description = "Get hotel by hotel-id",
             summary = "Get hotel parameters"
     )
-    public ResponseEntity<Hotel> getHotelById(@NotNull  @PathVariable("id") Long id) throws HotelNotFoundException {
-        Hotel hotel = getHotelByIdUseCase.execute(id)
-                .orElseThrow(() -> new HotelNotFoundException("User with id " + id + " not found"));
-        return ResponseEntity.ok().body(hotel);
+    public Mono<ResponseEntity<Hotel>> getHotelById(@PathVariable Long id) {
+        return Mono.fromCallable(() -> getHotelByIdUseCase.execute(id))
+                .map(ResponseEntity::ok)
+                .onErrorReturn(HotelNotFoundException.class, ResponseEntity.notFound().build());
     }
 
     @PatchMapping("/{id}")

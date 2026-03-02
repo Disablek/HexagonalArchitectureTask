@@ -6,5 +6,5 @@ import com.onlinehotel.hotelservice.model.Hotel;
 import java.util.Optional;
 
 public interface GetHotelByIdUseCase {
-    Optional<Hotel> execute(Long id) throws HotelNotFoundException;
+    Hotel execute(Long id) throws HotelNotFoundException;
 }
