@@ -1,4 +1,4 @@
-package com.onlinehotel.bookingservice.adapter.in.web.config;
+package com.onlinehotel.bookingservice.adapter.in.rest.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

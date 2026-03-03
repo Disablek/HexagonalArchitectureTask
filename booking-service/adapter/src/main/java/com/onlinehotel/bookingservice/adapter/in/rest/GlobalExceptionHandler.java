@@ -1,4 +1,4 @@
-package com.onlinehotel.bookingservice.adapter.in.web;
+package com.onlinehotel.bookingservice.adapter.in.rest;
 
 import com.onlinehotel.bookingservice.exception.BookingNotFoundException;
 import lombok.AllArgsConstructor;

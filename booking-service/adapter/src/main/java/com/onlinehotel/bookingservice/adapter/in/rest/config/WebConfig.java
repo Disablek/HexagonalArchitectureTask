@@ -1,4 +1,4 @@
-package com.onlinehotel.bookingservice.adapter.in.web.config;
+package com.onlinehotel.bookingservice.adapter.in.rest.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.CorsRegistry;
