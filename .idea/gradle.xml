@@ -13,6 +13,20 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/booking-service" />
+        <option name="gradleHome" value="" />
+        <option name="gradleJvm" value="21" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/booking-service" />
+            <option value="$PROJECT_DIR$/booking-service/adapter" />
+            <option value="$PROJECT_DIR$/booking-service/application" />
+            <option value="$PROJECT_DIR$/booking-service/bootstrap" />
+            <option value="$PROJECT_DIR$/booking-service/model" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotel-service" />
         <option name="gradleHome" value="" />
         <option name="gradleJvm" value="21" />

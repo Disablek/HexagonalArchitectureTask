@@ -7,7 +7,6 @@ import com.onlinehotel.hotelservice.out.persistence.jpa.mapper.HotelMapper;
 import com.onlinehotel.hotelservice.out.persistence.jpa.model.HotelJpaEntity;
 import com.onlinehotel.hotelservice.out.persistence.jpa.repository.HotelJpaRepository;
 import lombok.AllArgsConstructor;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
