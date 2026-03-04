@@ -1,0 +1,63 @@
+services:
+  ###=======================
+  ### ZIPKIN
+  ###=======================
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+    environment:
+      - STORAGE_TYPE=mem
+
+  kafka:
+    container_name: kafka
+    image: apache/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_KRAFT_MODE: 'true'
+
+      CLUSTER_ID: '1L6g7nGhu-eAKfL--X25wo'
+      KAFKA_NODE_ID: 1
+
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092, CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
+    volumes:
+      - kafka_kraft:/var/lib/kafka/data
+
+
+  ###=======================
+  ### POSTGRES
+  ###=======================
+  postgres:
+    container_name: postgres
+    image: postgres:13.3
+    ports:
+      - "5432:5432"
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U postgres"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 10
+    environment:
+      TZ: Europe/Minsk
+      PGTZ: Europe/Minsk
+      POSTGRES_DB: practise-app
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "pgpwd4habr"
+      PGDATA: /data/postgres
+    volumes:
+      - postgres.volume:/data/postgres
+
+volumes:
+  kafka_kraft:
+  postgres.volume:

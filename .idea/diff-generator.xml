@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DiffGenerationConfig">
-    <option name="sourceModelValue" value="booking-service.adapter.main:booking-service.adapter.main" />
-    <option name="targetDbValue" value="3ea86c41-5767-4bf8-82a2-791fcc1a871d" />
+    <option name="sourceModelValue" value="hotel-service.adapter.main:hotel-service.adapter.main" />
+    <option name="targetDbValue" value="169181f4-6cdf-4295-ac97-c30bdbb3a5a0" />
   </component>
 </project>

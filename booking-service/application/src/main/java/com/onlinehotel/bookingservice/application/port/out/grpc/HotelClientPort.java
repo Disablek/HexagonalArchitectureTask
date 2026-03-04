@@ -1,4 +1,4 @@
-package com.onlinehotel.bookingservice.application.port.out;
+package com.onlinehotel.bookingservice.application.port.out.grpc;
 
 import com.onlinehotel.bookingservice.application.dto.RoomInfo;
 

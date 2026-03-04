@@ -11,6 +11,19 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: server.broadcast
+      auto-offset-reset: earliest
+    producer:
+      retries: 5
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      properties:
+        enable:
+          idempotence: true
+
 server:
   port: 0
   forward-headers-strategy: framework
