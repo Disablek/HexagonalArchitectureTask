@@ -1,6 +1,6 @@
 package com.onlinehotel.bookingservice.adapter.out.persistence.jpa;
 
-import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.mapper.BookingMapper;
+import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.mapper.BookingJpaMapper;
 import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.model.BookingJpaEntity;
 import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.repository.BookingJpaRepository;
 import com.onlinehotel.bookingservice.application.port.out.persistence.BookingRepositoryPort;
@@ -16,7 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class JpaBookingAdapter implements BookingRepositoryPort {
     private final BookingJpaRepository bookingJpaRepository;
-    private final BookingMapper bookingMapper;
+    private final BookingJpaMapper bookingMapper;
 
     @Override
     public Booking findById(Long id) throws BookingNotFoundException {

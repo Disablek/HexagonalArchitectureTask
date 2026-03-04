@@ -10,9 +10,14 @@
           <entry name="$PROJECT_DIR$/../../../../Program/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.6.3/52e345c907fbf173b376586c7f8b131d53fa5867/mapstruct-processor-1.6.3.jar" />
           <entry name="$PROJECT_DIR$/../../../../Program/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok-mapstruct-binding/0.2.0/2f1cf9ced7b720ba4996c942b816669e63f0fa4f/lombok-mapstruct-binding-0.2.0.jar" />
         </processorPath>
-        <module name="hotel-service.adapter.main" />
+        <module name="booking-service.adapter.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="grpc-contracts" target="21" />
+      <module name="grpc-contracts.main" target="21" />
+      <module name="grpc-contracts.test" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-parameters" />
@@ -23,6 +28,9 @@
       <module name="booking-service.bootstrap.test" options="-parameters -parameters" />
       <module name="booking-service.main" options="" />
       <module name="booking-service.test" options="" />
+      <module name="grpc-contracts" options="" />
+      <module name="grpc-contracts.main" options="" />
+      <module name="grpc-contracts.test" options="" />
       <module name="hotel-service" options="" />
       <module name="hotel-service.bootstrap" options="-parameters -parameters" />
       <module name="hotel-service.bootstrap.main" options="-parameters -parameters" />

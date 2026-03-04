@@ -1,6 +1,6 @@
 package com.onlinehotel.bookingservice.adapter.in.rest;
 
-import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.mapper.BookingMapper;
+import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.mapper.BookingJpaMapper;
 import com.onlinehotel.bookingservice.application.port.in.*;
 import com.onlinehotel.bookingservice.exception.BookingNotFoundException;
 import com.onlinehotel.bookingservice.model.Booking;
@@ -23,7 +23,7 @@ public class BookingController {
     private final CreateBookingUseCase createBookingUseCase;
     private final UpdateBookingUseCase updateBookingUseCase;
     private final CancelBookingUseCase cancelBookingUseCase;
-    private final BookingMapper bookingMapper;
+    private final BookingJpaMapper bookingMapper;
 
     @GetMapping
     @Operation(

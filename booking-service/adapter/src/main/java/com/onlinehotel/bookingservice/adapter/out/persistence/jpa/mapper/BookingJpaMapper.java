@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 import java.util.Set;
 
 @Mapper(componentModel = "spring")
-public interface BookingMapper {
+public interface BookingJpaMapper {
 
     Set<Booking> toDomain(Set<BookingJpaEntity> bookingJpaEntities);
 
