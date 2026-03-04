@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1772540845179-1" author="БульбочкаВ">
+    <changeSet id="1772617348114-1" author="БульбочкаВ">
         <createTable tableName="hotel">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_hotel"/>
@@ -18,7 +18,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1772540845179-2" author="БульбочкаВ">
+    <changeSet id="1772617348114-2" author="БульбочкаВ">
         <createTable tableName="hotel_room">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_hotel_room"/>
@@ -34,10 +34,10 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1772540845179-3" author="БульбочкаВ">
+    <changeSet id="1772617348114-3" author="БульбочкаВ">
         <addUniqueConstraint columnNames="hotel_id" constraintName="unique_serial_per_hotel" tableName="hotel_room"/>
     </changeSet>
-    <changeSet id="1772540845179-4" author="БульбочкаВ">
+    <changeSet id="1772617348114-4" author="БульбочкаВ">
         <addForeignKeyConstraint baseColumnNames="hotel_id" baseTableName="hotel_room"
                                  constraintName="FK_HOTEL_ROOM_ON_HOTEL" referencedColumnNames="id"
                                  referencedTableName="hotel"/>
