@@ -1,6 +1,6 @@
 package com.onlinehotel.bookingservice.adapter.in.grpc;
 
-import com.onlinehotel.bookingservice.adapter.in.grpc.mapper.BookingGRPCMapper;
+import com.onlinehotel.bookingservice.adapter.mapper.grpc.BookingGrpcMapper;
 import com.onlinehotel.bookingservice.adapter.out.grpc.BookingRequest;
 import com.onlinehotel.bookingservice.adapter.out.grpc.BookingResponse;
 import com.onlinehotel.bookingservice.adapter.out.grpc.BookingServiceGrpc;
@@ -13,7 +13,7 @@ import org.springframework.grpc.server.service.GrpcService;
 @GrpcService
 public class BookingGrpcService extends BookingServiceGrpc.BookingServiceImplBase {
     private final CreateBookingUseCase  createBookingUseCase;
-    private final BookingGRPCMapper grpcMapper;
+    private final BookingGrpcMapper grpcMapper;
 
     @Override
     public void processBooking(BookingRequest request, StreamObserver<BookingResponse> responseObserver) {

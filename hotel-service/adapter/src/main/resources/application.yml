@@ -11,5 +11,8 @@ springdoc:
   packages-to-scan: "*"
   paths-to-match: "*"
 
-
+spring:
+  grpc:
+    server:
+      port: 0
 

@@ -9,7 +9,7 @@ public class DateRange {
     private LocalDate checkOut;
 
     public long nights(){
-        return ChronoUnit.DAYS.between(checkIn,checkOut);
+        return ChronoUnit.DAYS.between(checkIn,checkOut) + 1;
     }
 
 

@@ -1,4 +1,4 @@
-package com.onlinehotel.bookingservice.adapter.out.persistence.jpa.mapper;
+package com.onlinehotel.bookingservice.adapter.mapper.jpa;
 
 import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.model.BookingJpaEntity;
 import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.model.DateRangeJpaEntity;

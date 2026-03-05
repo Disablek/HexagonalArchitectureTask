@@ -1,6 +1,6 @@
 package com.onlinehotel.bookingservice.adapter.out.persistence.jpa;
 
-import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.mapper.BookingJpaMapper;
+import com.onlinehotel.bookingservice.adapter.mapper.jpa.BookingJpaMapper;
 import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.model.BookingJpaEntity;
 import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.repository.BookingJpaRepository;
 import com.onlinehotel.bookingservice.application.port.out.persistence.BookingRepositoryPort;

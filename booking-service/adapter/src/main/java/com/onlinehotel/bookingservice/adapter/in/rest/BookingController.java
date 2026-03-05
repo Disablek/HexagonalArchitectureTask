@@ -1,6 +1,6 @@
 package com.onlinehotel.bookingservice.adapter.in.rest;
 
-import com.onlinehotel.bookingservice.adapter.out.persistence.jpa.mapper.BookingJpaMapper;
+import com.onlinehotel.bookingservice.adapter.mapper.jpa.BookingJpaMapper;
 import com.onlinehotel.bookingservice.application.port.in.*;
 import com.onlinehotel.bookingservice.exception.BookingNotFoundException;
 import com.onlinehotel.bookingservice.model.Booking;
