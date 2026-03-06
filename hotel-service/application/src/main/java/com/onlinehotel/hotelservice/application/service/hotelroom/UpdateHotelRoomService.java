@@ -4,6 +4,7 @@ import com.onlinehotel.hotelservice.application.port.in.hotelroom.UpdateHotelRoo
 import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRoomRepositoryPort;
 import com.onlinehotel.hotelservice.exception.HotelRoomNotFoundException;
 import com.onlinehotel.hotelservice.model.HotelRoom;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ public class UpdateHotelRoomService implements UpdateHotelRoomUseCase {
     }
 
     @Override
+    @CachePut(value = "hotelRoomCache", key = "#result.id")
     public HotelRoom execute(Long id, UpdateHotelRoomCommand command) throws HotelRoomNotFoundException {
         HotelRoom hotelRoom = hotelRoomRepositoryPort.findById(id);
         updatePartially(hotelRoom, command);

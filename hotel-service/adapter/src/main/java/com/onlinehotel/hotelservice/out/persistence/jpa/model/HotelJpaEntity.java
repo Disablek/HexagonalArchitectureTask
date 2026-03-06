@@ -3,6 +3,8 @@ package com.onlinehotel.hotelservice.out.persistence.jpa.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +24,7 @@ public class HotelJpaEntity {
     @NotNull
     private String address;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     private Set<HotelRoomJpaEntity> rooms = new HashSet<>();
 }

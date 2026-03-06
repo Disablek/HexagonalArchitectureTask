@@ -1,4 +1,4 @@
-package com.onlinehotel.hotelservice.in.web.config;
+package com.onlinehotel.hotelservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.CorsRegistry;

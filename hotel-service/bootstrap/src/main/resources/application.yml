@@ -1,4 +1,7 @@
 spring:
+  grpc:
+    server:
+      port: 0
   application:
     name: hotel-service
   datasource:
@@ -28,3 +31,6 @@ management:
     web:
       exposure:
         include: "*"
+
+
+

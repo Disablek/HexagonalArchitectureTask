@@ -10,10 +10,8 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
-@Table(name = "hotel_room", uniqueConstraints = {
-        @UniqueConstraint(name = "unique_serial_per_hotel",
-                columnNames = {"hotel_id", "serial_Number"})
-})public class HotelRoomJpaEntity {
+@Table(name = "hotel_room")
+public class HotelRoomJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

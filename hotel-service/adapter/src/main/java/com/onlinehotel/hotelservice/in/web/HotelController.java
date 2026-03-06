@@ -15,7 +15,6 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
 
 import java.util.Set;
 
@@ -38,8 +37,7 @@ public class HotelController {
             summary = "Get all hotels parameters"
     )
     public ResponseEntity<Set<Hotel>> getAllHotels(){
-        Set<Hotel> hotels = this.getAllHotelsUseCase.execute();
-        return new ResponseEntity<>(hotels, HttpStatus.OK);
+        return ResponseEntity.ok(getAllHotelsUseCase.execute());
     }
 
     @GetMapping("/{id}")
@@ -47,10 +45,9 @@ public class HotelController {
             description = "Get hotel by hotel-id",
             summary = "Get hotel parameters"
     )
-    public Mono<ResponseEntity<Hotel>> getHotelById(@PathVariable Long id) {
-        return Mono.fromCallable(() -> getHotelByIdUseCase.execute(id))
-                .map(ResponseEntity::ok)
-                .onErrorReturn(HotelNotFoundException.class, ResponseEntity.notFound().build());
+    public ResponseEntity<Hotel> getHotelById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                getHotelByIdUseCase.execute(id));
     }
 
     @PatchMapping("/{id}")

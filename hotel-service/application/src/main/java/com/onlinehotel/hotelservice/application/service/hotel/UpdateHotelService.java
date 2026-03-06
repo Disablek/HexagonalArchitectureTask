@@ -18,7 +18,7 @@ public class UpdateHotelService implements UpdateHotelUseCase {
     }
 
     @Override
-    @CachePut(value = "HotelCache", key = "#id")
+    @CachePut(value = "hotelCache", key = "#id")
     public Hotel execute(Long id, UpdateHotelCommand command) throws HotelNotFoundException {
         Hotel hotel = hotelRepositoryPort.findById(id);
         updatePartially(hotel, command);

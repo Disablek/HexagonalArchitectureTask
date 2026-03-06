@@ -3,6 +3,7 @@ package com.onlinehotel.hotelservice.application.service.hotelroom;
 import com.onlinehotel.hotelservice.application.port.in.hotelroom.DeleteHotelRoomUseCase;
 import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRoomRepositoryPort;
 import com.onlinehotel.hotelservice.exception.HotelRoomNotFoundException;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ public class DeleteHotelRoomService implements DeleteHotelRoomUseCase {
     }
 
     @Override
+    @CacheEvict(value = "hotelRoomCache", key = "#roomId")
     public void execute(Long roomId) throws HotelRoomNotFoundException {
         hotelRoomRepositoryPort.findById(roomId);
         hotelRoomRepositoryPort.deleteById(roomId);

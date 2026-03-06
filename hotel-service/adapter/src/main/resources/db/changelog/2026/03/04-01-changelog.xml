@@ -34,13 +34,9 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1772617348114-3" author="БульбочкаВ">
-        <addUniqueConstraint columnNames="hotel_id" constraintName="unique_serial_per_hotel" tableName="hotel_room"/>
-    </changeSet>
     <changeSet id="1772617348114-4" author="БульбочкаВ">
         <addForeignKeyConstraint baseColumnNames="hotel_id" baseTableName="hotel_room"
                                  constraintName="FK_HOTEL_ROOM_ON_HOTEL" referencedColumnNames="id"
                                  referencedTableName="hotel"/>
     </changeSet>
-
 </databaseChangeLog>

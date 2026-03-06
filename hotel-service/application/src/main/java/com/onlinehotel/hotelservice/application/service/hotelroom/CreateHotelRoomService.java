@@ -5,6 +5,7 @@ import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRoomRe
 import com.onlinehotel.hotelservice.exception.DuplicateSerialNumberException;
 import com.onlinehotel.hotelservice.exception.HotelRoomAlreadyExists;
 import com.onlinehotel.hotelservice.model.HotelRoom;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,8 @@ public class CreateHotelRoomService implements CreateHotelRoomUseCase {
     }
 
     @Override
-    public HotelRoom execute(Long id,HotelRoom hotelRoom) throws DuplicateSerialNumberException, HotelRoomAlreadyExists {
+    @CachePut(value = "hotelRoomCache", key = "#result.id")
+    public HotelRoom execute(Long id, HotelRoom hotelRoom) throws DuplicateSerialNumberException, HotelRoomAlreadyExists {
         boolean serialExists = hotelRoomRepositoryPort
                 .findAllByHotelId(id)
                 .stream()

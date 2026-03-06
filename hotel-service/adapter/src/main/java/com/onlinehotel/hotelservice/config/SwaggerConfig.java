@@ -1,4 +1,4 @@
-package com.onlinehotel.hotelservice.in.web.config;
+package com.onlinehotel.hotelservice.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

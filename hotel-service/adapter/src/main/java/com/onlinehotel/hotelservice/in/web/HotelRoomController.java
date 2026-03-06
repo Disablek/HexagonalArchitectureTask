@@ -71,7 +71,7 @@ public class HotelRoomController {
     @Operation(summary = "Create hotelRoom in hotel")
     public ResponseEntity<HotelRoom> createHotelRoom(
                                             @Valid @RequestBody CreateHotelRoomRequest createHotelRoomRequest,
-                                            @RequestParam("hotelId") Long hotelId)
+                                            @PathVariable("hotelId") Long hotelId)
                                             throws DuplicateSerialNumberException, InvalidArgumentException {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 createHotelRoomUseCase.execute(
