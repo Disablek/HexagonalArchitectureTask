@@ -18,8 +18,7 @@ public class UpdateHotelRoomService implements UpdateHotelRoomUseCase {
 
     @Override
     public HotelRoom execute(Long id, UpdateHotelRoomCommand command) throws HotelRoomNotFoundException {
-        HotelRoom hotelRoom = hotelRoomRepositoryPort.findById(id)
-                .orElseThrow(() -> new HotelRoomNotFoundException("Hotel Room Not Found with ID: " + id));
+        HotelRoom hotelRoom = hotelRoomRepositoryPort.findById(id);
         updatePartially(hotelRoom, command);
         return hotelRoomRepositoryPort.save(hotelRoom);
     }

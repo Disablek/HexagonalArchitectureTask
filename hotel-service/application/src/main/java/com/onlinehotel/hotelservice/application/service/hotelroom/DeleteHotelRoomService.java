@@ -17,9 +17,7 @@ public class DeleteHotelRoomService implements DeleteHotelRoomUseCase {
 
     @Override
     public void execute(Long roomId) throws HotelRoomNotFoundException {
-        if(hotelRoomRepositoryPort.findById(roomId).isEmpty()){
-            throw new HotelRoomNotFoundException("HotelRoom Not Found with ID: " + roomId);
-        }
+        hotelRoomRepositoryPort.findById(roomId);
         hotelRoomRepositoryPort.deleteById(roomId);
     }
 }

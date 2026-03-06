@@ -18,8 +18,7 @@ public class GetHotelRoomDetailsService implements GetHotelRoomDetailsUseCase {
 
     @Override
     public HotelRoomDetailsDto details(Long roomId) {
-        HotelRoom hotelRoom = hotelRoomRepositoryPort.findById(roomId)
-                .orElseThrow(() -> new HotelRoomNotFoundException("Hotel Room Not Found with Room Id: " + roomId));
+        HotelRoom hotelRoom = hotelRoomRepositoryPort.findById(roomId);
         return HotelRoomDetailsDto.builder()
                 .price(hotelRoom.getPrice())
                 .serialNumber(hotelRoom.getSerialNumber())

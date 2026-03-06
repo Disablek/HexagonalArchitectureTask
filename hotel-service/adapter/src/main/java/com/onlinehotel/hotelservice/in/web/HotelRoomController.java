@@ -54,10 +54,7 @@ public class HotelRoomController {
     )
     public ResponseEntity<HotelRoom> getHotelRoomById(@NotNull @PathVariable("id") Long hotelRoomId)
             throws HotelRoomNotFoundException {
-        return ResponseEntity.ok().body(getHotelRoomByIdUseCase.execute(hotelRoomId)
-                .orElseThrow(
-                        () -> new HotelRoomNotFoundException("HotelRoom notFound with id + " + hotelRoomId)
-                ));
+        return ResponseEntity.ok().body(getHotelRoomByIdUseCase.execute(hotelRoomId));
     }
 
     @GetMapping

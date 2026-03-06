@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
@@ -46,8 +47,10 @@ public class JpaHotelAdapter implements HotelRepositoryPort {
 
     @Override
     public Set<Hotel> findAll() {
-        return hotelMapper.toDomainSet(
-                new HashSet<>(hotelJpaRepository.findAll())
-        );
+        return hotelJpaRepository.findAll()
+                .stream()
+                .map(hotelMapper::toDomain)
+                .collect(Collectors.toSet());
     }
+
 }

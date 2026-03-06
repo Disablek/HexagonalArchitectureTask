@@ -7,8 +7,6 @@ import com.onlinehotel.hotelservice.model.HotelRoom;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @Transactional
 public class GetHotelRoomByIdService implements GetHotelRoomByIdUseCase {
@@ -19,11 +17,7 @@ public class GetHotelRoomByIdService implements GetHotelRoomByIdUseCase {
     }
 
     @Override
-    public Optional<HotelRoom> execute(Long roomId) throws HotelRoomNotFoundException {
-        return Optional.of(hotelRoomRepositoryPort.findById(roomId)
-                .orElseThrow(
-                        () -> new HotelRoomNotFoundException("HotelRoom with id " + roomId + " not found")
-                )
-        );
+    public HotelRoom execute(Long roomId) throws HotelRoomNotFoundException {
+        return hotelRoomRepositoryPort.findById(roomId);
     }
 }
