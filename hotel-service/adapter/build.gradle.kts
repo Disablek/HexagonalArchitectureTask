@@ -6,7 +6,12 @@ plugins {
 }
 
 group = "com.salary-app"
-version = "unspecified"
+version = "1.0-SNAPSHOT"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
 
 repositories {
     mavenCentral()
@@ -17,17 +22,17 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.boot:spring-boot-dependencies:4.0.2")
         mavenBom("org.springframework.grpc:spring-grpc-dependencies:$springGrpcVersion")
-        mavenBom("io.grpc:grpc-bom:1.62.2")
+        mavenBom("io.grpc:grpc-bom:1.73.0")
     }
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:4.25.5"
+        artifact = "com.google.protobuf:protoc:4.34.0"
     }
     plugins {
         create("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.62.2"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.73.0"
         }
     }
     generateProtoTasks {
@@ -42,34 +47,44 @@ protobuf {
 }
 
 dependencies {
+    // REDIS
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    testImplementation("org.springframework.boot:spring-boot-starter-data-redis-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    
     // gRPC
-    implementation("io.grpc:grpc-services:1.73.0")
     implementation("org.springframework.grpc:spring-grpc-spring-boot-starter:$springGrpcVersion")
-    runtimeOnly("io.grpc:grpc-netty-shaded:1.62.2")
     implementation("com.salary-app:grpc-contracts:1.0.0")
 
-    implementation("org.projectlombok:lombok")
-    implementation("org.mapstruct:mapstruct:1.6.3")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-kafka")
-    testImplementation("org.springframework.kafka:spring-kafka-test")
+    // Spring Boot
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-    annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor ("org.mapstruct:mapstruct-processor:1.6.3")
+    // Kafka
+    implementation("org.springframework.boot:spring-boot-starter-kafka")
+    implementation("io.projectreactor.kafka:reactor-kafka:1.3.25")
+
+    // Model & Application
+    implementation(project(":model"))
+    implementation(project(":application"))
+
+    // Lombok + MapStruct
+    compileOnly("org.projectlombok:lombok:1.18.42")
+    annotationProcessor("org.projectlombok:lombok:1.18.42")
+    implementation("org.mapstruct:mapstruct:1.6.3")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
     annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
-    implementation("org.springframework.boot:spring-boot-starter-liquibase")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    //implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
+    // Tests
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-
-    implementation(project(":application"))
-    implementation(project(":model"))
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-kafka-test")
 }
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }

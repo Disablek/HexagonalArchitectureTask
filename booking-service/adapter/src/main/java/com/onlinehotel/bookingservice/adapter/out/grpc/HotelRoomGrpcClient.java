@@ -4,7 +4,7 @@ import com.onlinehotel.bookingservice.adapter.mapper.grpc.HotelRoomGrpcMapper;
 import com.onlinehotel.bookingservice.application.dto.HotelRoomDetailsDto;
 
 import com.onlinehotel.bookingservice.application.port.out.grpc.HotelRoomServicePort;
-import com.onlinehotel.hotelservice.adapter.in.grpc.HotelRequest;
+import com.onlinehotel.hotelservice.adapter.in.grpc.HotelRoomRequest;
 import com.onlinehotel.hotelservice.adapter.in.grpc.HotelRoomServiceGrpc;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,12 +20,12 @@ public class HotelRoomGrpcClient implements HotelRoomServicePort {
 
     @Override
     public HotelRoomDetailsDto getHotelDetails(Long hotelId, Long roomId) {
-        HotelRequest request = HotelRequest.newBuilder()
+        HotelRoomRequest request = HotelRoomRequest.newBuilder()
                 .setHotelId(hotelId)
                 .setRoomId(roomId)
                 .build();
         return hotelRoomGrpcMapper.toDto(
-                blockingStub.getHotelDetails(request));
+                blockingStub.getHotelRoomDetails(request));
     }
 
     @Override

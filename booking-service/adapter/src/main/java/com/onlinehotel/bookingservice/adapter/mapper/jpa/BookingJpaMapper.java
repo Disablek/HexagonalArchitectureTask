@@ -22,6 +22,9 @@ public interface BookingJpaMapper {
 
     Booking toDomain(BookingJpaEntity entity);
 
+    @Mapping(target = "createdAt", ignore = true)
+    BookingJpaEntity toJpaEntity(Booking booking);
+
     default DateRange map(DateRangeJpaEntity dateRange) {
         if (dateRange == null) return null;
         return new DateRange(dateRange.getCheckIn(), dateRange.getCheckOut());
@@ -31,9 +34,6 @@ public interface BookingJpaMapper {
         if (dateRange == null) return null;
         return new DateRangeJpaEntity (dateRange.getCheckIn(), dateRange.getCheckOut());
     }
-
-    @Mapping(target = "createdAt", ignore = true)
-    BookingJpaEntity toJpaEntity(Booking booking);
 }
 
 

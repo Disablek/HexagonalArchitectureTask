@@ -21,6 +21,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="bootstrap" target="21" />
+      <module name="bootstrap.main" target="21" />
+      <module name="bootstrap.test" target="21" />
       <module name="grpc-contracts" target="21" />
       <module name="grpc-contracts.main" target="21" />
       <module name="grpc-contracts.test" target="21" />
@@ -44,6 +47,12 @@
       <module name="hotel-service.bootstrap.test" options="-parameters -parameters" />
       <module name="hotel-service.main" options="" />
       <module name="hotel-service.test" options="" />
+      <module name="payment-service" options="" />
+      <module name="payment-service.bootstrap" options="-parameters -parameters" />
+      <module name="payment-service.bootstrap.main" options="-parameters -parameters" />
+      <module name="payment-service.bootstrap.test" options="-parameters -parameters" />
+      <module name="payment-service.main" options="" />
+      <module name="payment-service.test" options="" />
     </option>
   </component>
 </project>

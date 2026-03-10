@@ -12,6 +12,8 @@ spring:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
   grpc:
+    hotel-service:
+      address: localhost:63345
     server:
       port: 0
 

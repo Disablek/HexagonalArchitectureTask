@@ -41,6 +41,20 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/payment-service" />
+        <option name="gradleHome" value="" />
+        <option name="gradleJvm" value="21" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/payment-service" />
+            <option value="$PROJECT_DIR$/payment-service/adapter" />
+            <option value="$PROJECT_DIR$/payment-service/application" />
+            <option value="$PROJECT_DIR$/payment-service/bootstrap" />
+            <option value="$PROJECT_DIR$/payment-service/model" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/service-registry" />
         <option name="gradleJvm" value="21" />
         <option name="modules">

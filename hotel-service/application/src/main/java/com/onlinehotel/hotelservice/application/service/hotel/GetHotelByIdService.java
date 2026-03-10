@@ -27,10 +27,6 @@ public class GetHotelByIdService implements GetHotelByIdUseCase {
     @Cacheable(value = "hotelCache", key = "#hotelId")
     @Transactional(readOnly = true)
     public Hotel execute(Long hotelId) throws HotelNotFoundException {
-        if (hotelId == null) {
-            throw new InvalidArgumentException("id is null", "id");
-        }
-        System.out.println("hotelId: " + hotelId);
         return hotelRepositoryPort.findById(hotelId);
     }
 }

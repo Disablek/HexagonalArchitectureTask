@@ -23,7 +23,11 @@ repositories {
 }
 
 dependencies {
+    // gRPC
+    implementation("org.springframework.grpc:spring-grpc-spring-boot-starter:$springGrpcVersion")
     implementation("com.salary-app:grpc-contracts:1.0.0")
+    runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
+
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
