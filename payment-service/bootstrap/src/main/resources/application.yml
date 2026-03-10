@@ -15,7 +15,7 @@ spring:
     server:
       port: 0
     booking-service:
-      address: localhost:63766
+      address: localhost:64673
 
   kafka:
     bootstrap-servers: localhost:9092
