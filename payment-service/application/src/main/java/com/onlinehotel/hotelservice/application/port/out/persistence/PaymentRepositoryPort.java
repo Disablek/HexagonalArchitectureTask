@@ -14,4 +14,6 @@ public interface PaymentRepositoryPort {
     void proceedPayment(Long paymentId);
 
     void cancelPayment(Long paymentId);
+
+    Payment getProceedPaymentByBookingId(Long bookingId);
 }

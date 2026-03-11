@@ -1,7 +1,5 @@
 spring:
-  grpc:
-    server:
-      port: 0
+
   application:
     name: hotel-service
   datasource:
@@ -13,6 +11,10 @@ spring:
     type: redis
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+grpc:
+  server:
+    port: 0
 
 server:
   port: 0
@@ -26,6 +28,9 @@ eureka:
       defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true
+    non-secure-port-enabled: true
+    non-secure-port: ${grpc.server.port}
+
 management:
   endpoints:
     web:

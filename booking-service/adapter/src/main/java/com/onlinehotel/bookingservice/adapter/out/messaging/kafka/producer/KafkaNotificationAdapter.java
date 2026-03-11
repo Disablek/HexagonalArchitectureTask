@@ -15,4 +15,5 @@ public class KafkaNotificationAdapter implements NotificationPort {
     public void sendBookingCreated(BookingCreatedEvent event) {
         kafkaTemplate.send("booking-created", event.bookingId(), event);
     }
+
 }

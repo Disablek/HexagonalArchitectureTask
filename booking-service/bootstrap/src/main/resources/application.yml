@@ -1,3 +1,7 @@
+server:
+  port: 0
+  forward-headers-strategy: framework
+
 spring:
   application:
     name: booking-service
@@ -12,8 +16,12 @@ spring:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
   grpc:
-    hotel-service:
-      address: localhost:64642
+    client:
+      hotel-service:
+        address: "discovery:///hotel-service"
+      default-channel:
+        address: "static://127.0.0.1:9090"
+        negotiation-type: plaintext
     server:
       port: 0
 
@@ -30,9 +38,7 @@ spring:
         enable:
           idempotence: true
 
-server:
-  port: 0
-  forward-headers-strategy: framework
+
 
 eureka:
   client:
@@ -41,7 +47,13 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
   instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     prefer-ip-address: true
+    non-secure-port-enabled: true
+    non-secure-port: ${spring.grpc.server.port}
+    metadata-map:
+      grpc.port: ${spring.grpc.server.port}
+
 management:
   endpoints:
     web:

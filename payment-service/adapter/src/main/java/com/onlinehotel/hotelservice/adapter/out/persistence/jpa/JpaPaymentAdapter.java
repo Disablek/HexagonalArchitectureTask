@@ -67,4 +67,12 @@ public class JpaPaymentAdapter implements PaymentRepositoryPort {
         paymentJpaEntity.setPaymentStatus(PaymentStatus.CANCELED);
         paymentJpaRepository.save(paymentJpaEntity);
     }
+
+    @Override
+    public Payment getProceedPaymentByBookingId(Long bookingId) {
+
+        PaymentJpaEntity paymentJpaEntity = paymentJpaRepository.getPaymentJpaEntityByBookingIdAndPaymentStatus(bookingId, PaymentStatus.PROCEED);
+
+        return paymentMapper.toDomain(paymentJpaEntity);
+    }
 }

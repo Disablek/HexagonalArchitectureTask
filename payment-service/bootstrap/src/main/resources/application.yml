@@ -14,8 +14,13 @@ spring:
   grpc:
     server:
       port: 0
-    booking-service:
-      address: localhost:64673
+    client:
+      port-metadata: grpc.port
+      channels:
+        booking-service:
+          negotiation-type: plaintext
+          address: discovery:///booking-service
+
 
   kafka:
     bootstrap-servers: localhost:9092
@@ -42,6 +47,9 @@ eureka:
       defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true
+    non-secure-port-enabled: true
+    non-secure-port: ${spring.grpc.server.port}
+
 management:
   endpoints:
     web:

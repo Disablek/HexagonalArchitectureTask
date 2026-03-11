@@ -22,7 +22,6 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.boot:spring-boot-dependencies:4.0.2")
         mavenBom("org.springframework.grpc:spring-grpc-dependencies:$springGrpcVersion")
-        mavenBom("io.grpc:grpc-bom:1.73.0")
     }
 }
 
@@ -53,8 +52,12 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     
     // gRPC
-    implementation("org.springframework.grpc:spring-grpc-spring-boot-starter:$springGrpcVersion")
+    implementation("io.grpc:grpc-services")
+    implementation("org.springframework.grpc:spring-grpc-client-spring-boot-starter")
+    implementation("org.springframework.grpc:spring-grpc-server-spring-boot-starter")
     implementation("com.salary-app:grpc-contracts:1.0.0")
+    runtimeOnly("io.grpc:grpc-netty:1.73.0")
+    runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
 
     // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter")
