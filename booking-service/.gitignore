@@ -7,7 +7,7 @@
 *.zip
 *.tar.gz
 target/
-build/
+**/build/
 out/
 *.proto
 
@@ -73,5 +73,3 @@ GradleLock
 *.bin
 **/*.bin
 *.tmp
-.DS_Store
-Thumbs.db

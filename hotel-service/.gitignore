@@ -7,7 +7,7 @@
 *.zip
 *.tar.gz
 target/
-build/
+**/build/
 out/
 *.proto
 
