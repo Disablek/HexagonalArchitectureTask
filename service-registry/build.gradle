@@ -23,10 +23,6 @@ ext {
 }
 
 dependencies {
-    implementation("io.grpc:grpc-services")
-    implementation("net.devh:grpc-spring-boot-starter:3.1.0.RELEASE")
-    runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
-
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'

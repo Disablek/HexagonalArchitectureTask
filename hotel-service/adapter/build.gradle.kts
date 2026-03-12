@@ -57,7 +57,7 @@ dependencies {
     implementation("org.springframework.grpc:spring-grpc-server-spring-boot-starter")
     implementation("com.salary-app:grpc-contracts:1.0.0")
     runtimeOnly("io.grpc:grpc-netty:1.73.0")
-    runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
+    //runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
 
     // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter")

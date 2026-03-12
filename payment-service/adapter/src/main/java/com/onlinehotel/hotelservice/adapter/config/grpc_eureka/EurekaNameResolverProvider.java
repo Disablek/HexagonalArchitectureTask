@@ -33,6 +33,5 @@ public class EurekaNameResolverProvider extends NameResolverProvider {
 
         return new EurekaNameResolver(eurekaClient, serviceName, portMetaData);
     }
-
 }
 

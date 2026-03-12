@@ -17,10 +17,12 @@ spring:
 
   grpc:
     client:
-      hotel-service:
-        address: "discovery:///hotel-service"
+      channels:
+        hotel-service:
+          address: static://localhost:9090
+          negotiation-type: plaintext
       default-channel:
-        address: "static://127.0.0.1:9090"
+        address: static://localhost:9090
         negotiation-type: plaintext
     server:
       port: 0
@@ -37,8 +39,6 @@ spring:
       properties:
         enable:
           idempotence: true
-
-
 
 eureka:
   client:

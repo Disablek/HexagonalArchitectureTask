@@ -48,7 +48,7 @@ public class EurekaNameResolver extends NameResolver {
                     ", grpc.port='" + grpcPortStr + "'");
 
             int port;
-            if (grpcPortStr != null && !grpcPortStr.isEmpty()) {
+            if (grpcPortStr != null && !grpcPortStr.isEmpty() && !grpcPortStr.equals("0")) {
                 try {
                     port = Integer.parseInt(grpcPortStr);
                     System.out.println("✅ Using GRPC metadata port: " + port);
@@ -58,7 +58,7 @@ public class EurekaNameResolver extends NameResolver {
                 }
             } else {
                 System.err.println("❌ NO grpc.port metadata, using default HTTP port: " + instance.getPort());
-                port = instance.getPort();
+                port = instance.getPort() + 3;
             }
 
             InetSocketAddress addr = new InetSocketAddress(instance.getHostName(), port);
