@@ -73,5 +73,3 @@ GradleLock
 *.bin
 **/*.bin
 *.tmp
-.DS_Store
-Thumbs.db
