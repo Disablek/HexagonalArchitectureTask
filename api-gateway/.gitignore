@@ -1,37 +1,77 @@
-HELP.md
-.gradle
+# Compiled class files
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+target/
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+*.proto
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
 
-### VS Code ###
+# Gradle
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build.gradle
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+*.iml
 .vscode/
+!.idea/runConfigurations/
+!.idea/dictionaries/
+!.idea/workspace.xml
+!.idea/tasks.xml
+!.idea/gradle.xml
+!.idea/assetWizardSettings.xml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Dependency directories
+node_modules/
+**/node_modules/
+
+# Runtime data
+pids
+*.pid
+
+spring/
+spring-boot-run/
+
+# Lock файлы
+*.lock
+**/*.lock
+.lck
+MavenLock
+GradleLock
+
+# Бинарники
+*.bin
+**/*.bin
+*.tmp
+.DS_Store
+Thumbs.db

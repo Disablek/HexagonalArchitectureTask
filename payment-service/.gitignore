@@ -61,3 +61,17 @@ pids
 
 spring/
 spring-boot-run/
+
+# Lock файлы
+*.lock
+**/*.lock
+.lck
+MavenLock
+GradleLock
+
+# Бинарники
+*.bin
+**/*.bin
+*.tmp
+.DS_Store
+Thumbs.db
