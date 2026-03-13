@@ -16,16 +16,14 @@ spring:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
   grpc:
-    client:
-      channels:
-        hotel-service:
-          address: static://localhost:9090
-          negotiation-type: plaintext
-      default-channel:
-        address: static://localhost:9090
-        negotiation-type: plaintext
     server:
       port: 0
+    client:
+      port-metadata: grpc.port
+      channels:
+        hotel-service:
+          address: discovery:///hotel-service
+          negotiation-type: plaintext
 
   kafka:
     bootstrap-servers: localhost:9092

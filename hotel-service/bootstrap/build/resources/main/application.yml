@@ -12,9 +12,9 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
-grpc:
-  server:
-    port: 0
+  grpc:
+    server:
+      port: 0
 
 server:
   port: 0
@@ -27,9 +27,12 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
   instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     prefer-ip-address: true
     non-secure-port-enabled: true
-    non-secure-port: ${grpc.server.port}
+    non-secure-port: ${spring.grpc.server.port}
+    metadata-map:
+      grpc.port: ${spring.grpc.server.port}
 
 management:
   endpoints:

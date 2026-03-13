@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 @Service
-@Transactional
 public class GetAllBookingService implements GetAllBookingsUseCase {
     private final BookingRepositoryPort bookingRepositoryPort;
 
@@ -18,6 +17,7 @@ public class GetAllBookingService implements GetAllBookingsUseCase {
     }
 
     @Override
+    @Transactional
     public Set<Booking> execute() {
         return bookingRepositoryPort.findAll();
     }

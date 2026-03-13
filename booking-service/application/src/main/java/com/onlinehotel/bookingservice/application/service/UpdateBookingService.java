@@ -6,13 +6,13 @@ import com.onlinehotel.bookingservice.application.port.out.grpc.HotelRoomService
 import com.onlinehotel.bookingservice.application.port.out.persistence.BookingRepositoryPort;
 import com.onlinehotel.bookingservice.model.Booking;
 import com.onlinehotel.bookingservice.model.BookingStatus;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
 @Service
-@Transactional
 public class UpdateBookingService implements UpdateBookingUseCase {
     private final BookingRepositoryPort bookingRepositoryPort;
     private final HotelRoomServicePort hotelRoomServicePort;
@@ -23,6 +23,8 @@ public class UpdateBookingService implements UpdateBookingUseCase {
     }
 
     @Override
+    @Transactional
+    @CachePut(value = "bookingCache", key = "#result.id")
     public Booking execute(Long id, UpdateBookingCommand command) {
         Booking booking = bookingRepositoryPort.findById(id);
         if (booking.getBookingStatus() == BookingStatus.CONFIRMED) {

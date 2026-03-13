@@ -22,6 +22,7 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.boot:spring-boot-dependencies:4.0.2")
         mavenBom("org.springframework.grpc:spring-grpc-dependencies:$springGrpcVersion")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:2025.1.0")
     }
 }
 
@@ -50,8 +51,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     testImplementation("org.springframework.boot:spring-boot-starter-data-redis-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    
+
     // gRPC
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("io.grpc:grpc-services")
     implementation("org.springframework.grpc:spring-grpc-client-spring-boot-starter")
     implementation("org.springframework.grpc:spring-grpc-server-spring-boot-starter")

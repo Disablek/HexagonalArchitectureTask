@@ -7,13 +7,13 @@ import com.onlinehotel.bookingservice.application.port.out.grpc.HotelRoomService
 import com.onlinehotel.bookingservice.application.port.out.messaging.kafka.NotificationPort;
 import com.onlinehotel.bookingservice.application.port.out.persistence.BookingRepositoryPort;
 import com.onlinehotel.bookingservice.model.Booking;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
 @Service
-@Transactional
 public class CreateBookingService implements CreateBookingUseCase {
     private final BookingRepositoryPort bookingRepositoryPort;
     private final NotificationPort notificationPort;
@@ -26,6 +26,8 @@ public class CreateBookingService implements CreateBookingUseCase {
     }
 
     @Override
+    @Transactional
+    @CachePut(value = "bookingCache", key = "#result.id")
     public Booking execute(Booking booking) {
 
         HotelRoomDetailsDto hotelRoomDetailsDto = hotelRoomServicePort.getHotelDetails(

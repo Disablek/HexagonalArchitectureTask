@@ -20,12 +20,16 @@ eureka:
 
   instance:
     instance-id: ${spring.application.name}:${random.value}
-#    non-secure-port: ${server.port}
-#    non-secure-port-enabled: true
+    non-secure-port: ${server.port}
+    non-secure-port-enabled: true
     prefer-ip-address: true
 
 
 springdoc:
+  gateway:
+    discovery:
+      locator:
+        enabled: true
   swagger-ui:
     urls:
       - name: "Hotel Service"

@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,7 @@ public class ProceedPaymentService implements ProceedPaymentUseCase {
 
     @Override
     @Transactional
+    @Cacheable(value = "paymentCache", key = "#result.id")
     public void execute(Long paymentId) throws PaymentNotFoundException {
         Payment payment = paymentRepositoryPort.findPaymentById(paymentId);
         BookingDetailsDto bookingDetailsDto = bookingServicePort.getBookingDetails(payment.getBookingId()); //ERROR
