@@ -3,16 +3,11 @@ package com.onlinehotel.hotelservice.application.service.hotel;
 import com.onlinehotel.hotelservice.application.port.in.hotel.GetHotelByIdUseCase;
 import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRepositoryPort;
 import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
-import com.onlinehotel.hotelservice.exception.InvalidArgumentException;
 import com.onlinehotel.hotelservice.model.Hotel;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 @Service
 @Transactional
@@ -26,7 +21,8 @@ public class GetHotelByIdService implements GetHotelByIdUseCase {
     @Override
     @Cacheable(value = "hotelCache", key = "#hotelId")
     @Transactional(readOnly = true)
-    public Hotel execute(Long hotelId) throws HotelNotFoundException {
-        return hotelRepositoryPort.findById(hotelId);
+    public Mono<Hotel> execute(Long hotelId) throws HotelNotFoundException {
+        return hotelRepositoryPort.findById(hotelId)
+                .switchIfEmpty(Mono.error(new HotelNotFoundException("Hotel not found with id: " + hotelId)));
     }
 }

@@ -1,15 +1,15 @@
 package com.onlinehotel.hotelservice.application.port.out.persistence;
 
 import com.onlinehotel.hotelservice.model.Hotel;
-
-import java.util.Set;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface HotelRepositoryPort {
-    Hotel findById(Long id);
+    Mono<Hotel> findById(Long id);
 
-    Hotel save(Hotel hotel);
+    Mono<Hotel> save(Hotel hotel);
 
-    void deleteById(Long id);
+    Mono<Void> deleteById(Long id);
 
-    Set<Hotel> findAll();
+    Flux<Hotel> findAll();
 }

@@ -1,9 +1,9 @@
 package com.onlinehotel.bookingservice.application.dto.event;
 
 import com.onlinehotel.bookingservice.model.Booking;
-import com.onlinehotel.bookingservice.model.DateRange;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -12,7 +12,8 @@ public record BookingCreatedEvent(
         Long bookingId,
         Long hotelId,
         Long hotelRoomId,
-        DateRange dateRange,
+        LocalDate checkIn,
+        LocalDate checkOut,
         BigDecimal totalPrice,
         LocalDateTime createdAt
 ) {
@@ -22,9 +23,22 @@ public record BookingCreatedEvent(
                 booking.getId(),
                 booking.getHotelId(),
                 booking.getHotelRoomId(),
-                booking.getDateRange(),
+                booking.getCheckIn(),
+                booking.getCheckOut(),
                 booking.getTotalPrice(),
                 LocalDateTime.now()
+        );
+    }
+
+    public static Booking to(BookingCreatedEvent bookingCreatedEvent) {
+        return new Booking(
+                null,
+                bookingCreatedEvent.hotelId(),
+                bookingCreatedEvent.hotelRoomId(),
+                bookingCreatedEvent.checkIn(),
+                bookingCreatedEvent.checkOut(),
+                null,
+                bookingCreatedEvent.totalPrice()
         );
     }
 }

@@ -1,5 +1,3 @@
-import org.apache.tools.ant.taskdefs.Java
-
 plugins {
     java
     id("org.springframework.boot") version "4.0.2" apply false

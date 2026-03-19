@@ -2,7 +2,8 @@ package com.onlinehotel.hotelservice.application.port.in.hotelroom;
 
 import com.onlinehotel.hotelservice.exception.HotelRoomNotFoundException;
 import com.onlinehotel.hotelservice.model.HotelRoom;
+import reactor.core.publisher.Mono;
 
 public interface GetHotelRoomByIdUseCase {
-    HotelRoom execute(Long roomId) throws HotelRoomNotFoundException;
+    Mono<HotelRoom> execute(Long roomId) throws HotelRoomNotFoundException;
 }

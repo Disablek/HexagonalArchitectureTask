@@ -30,7 +30,7 @@ spring:
     producer:
       retries: 5
       value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
-      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      key-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
       properties:
         enable:
           idempotence: true

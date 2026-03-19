@@ -47,7 +47,7 @@ protobuf {
 }
 
 dependencies {
-    // REDIS
+     // REDIS
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     testImplementation("org.springframework.boot:spring-boot-starter-data-redis-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -61,9 +61,9 @@ dependencies {
     runtimeOnly("io.grpc:grpc-netty:1.73.0")
     //runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
 
-    // Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    // Spring Boot R2DBC
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    implementation("org.springframework.boot:spring-boot-starter-r2dbc")
 
     // Kafka
     implementation("org.springframework.boot:spring-boot-starter-kafka")

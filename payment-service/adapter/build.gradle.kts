@@ -47,6 +47,10 @@ protobuf {
 }
 
 dependencies {
+    // REDIS
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    testImplementation("org.springframework.boot:spring-boot-starter-data-redis-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     // gRPC
     implementation("io.grpc:grpc-services")
     implementation("org.springframework.grpc:spring-grpc-client-spring-boot-starter")

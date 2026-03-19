@@ -7,8 +7,7 @@ import com.onlinehotel.hotelservice.model.HotelRoom;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Set;
+import reactor.core.publisher.Flux;
 
 @Service
 @Transactional
@@ -21,7 +20,7 @@ public class GetAllHotelRoomsByHotelIdService implements GetAllHotelRoomsByHotel
 
     @Override
     @Cacheable(value = "hotelRoomsByHotelId", key = "#hotelId")
-    public Set<HotelRoom> execute(Long hotelId) throws HotelNotFoundException {
+    public Flux<HotelRoom> execute(Long hotelId) throws HotelNotFoundException {
         return hotelRoomRepositoryPort.findAllByHotelId(hotelId);
     }
 }

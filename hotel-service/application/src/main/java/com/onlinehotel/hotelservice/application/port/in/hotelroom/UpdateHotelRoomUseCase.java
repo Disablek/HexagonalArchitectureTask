@@ -3,17 +3,27 @@ package com.onlinehotel.hotelservice.application.port.in.hotelroom;
 import com.onlinehotel.hotelservice.exception.HotelRoomNotFoundException;
 import com.onlinehotel.hotelservice.model.HotelRoom;
 import com.onlinehotel.hotelservice.model.RoomType;
+import lombok.*;
+import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 public interface UpdateHotelRoomUseCase {
-    HotelRoom execute(Long id, UpdateHotelRoomCommand command) throws HotelRoomNotFoundException;
+    Mono<HotelRoom> execute(Long id, UpdateHotelRoomCommand command) throws HotelRoomNotFoundException;
 
-    record UpdateHotelRoomCommand(
-            Optional<Integer> serialNumber,
-            Optional<Integer> capacity,
-            Optional<BigDecimal> price,
-            Optional<RoomType> roomType
-    ){}
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    class UpdateHotelRoomCommand {
+        private Long id;
+
+        private Integer serialNumber;
+
+        private Integer capacity;
+
+        private BigDecimal price;
+
+        private RoomType roomType;
+    }
 }

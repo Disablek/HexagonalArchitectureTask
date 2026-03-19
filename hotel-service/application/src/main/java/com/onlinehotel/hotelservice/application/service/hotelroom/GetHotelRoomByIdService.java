@@ -7,6 +7,7 @@ import com.onlinehotel.hotelservice.model.HotelRoom;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
 
 @Service
 @Transactional
@@ -19,7 +20,9 @@ public class GetHotelRoomByIdService implements GetHotelRoomByIdUseCase {
 
     @Override
     @Cacheable(value = "hotelRoomCache", key = "#roomId")
-    public HotelRoom execute(Long roomId) throws HotelRoomNotFoundException {
-        return hotelRoomRepositoryPort.findById(roomId);
+    public Mono<HotelRoom> execute(Long roomId) {
+        return hotelRoomRepositoryPort.findById(roomId)
+                .switchIfEmpty(Mono.error(new HotelRoomNotFoundException("Hotel Room Not Found with id: " +roomId)));
     }
+
 }

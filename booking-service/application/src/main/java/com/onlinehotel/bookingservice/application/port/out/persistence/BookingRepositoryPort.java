@@ -1,13 +1,13 @@
 package com.onlinehotel.bookingservice.application.port.out.persistence;
 
 import com.onlinehotel.bookingservice.model.Booking;
-
-import java.util.Set;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface BookingRepositoryPort {
-    Booking findById(Long id);
+    Mono<Booking> findById(Long id);
 
-    Set<Booking> findAll();
+    Flux<Booking> findAll();
 
-    Booking save(Booking booking);
+    Mono<Booking> save(Booking booking);
 }

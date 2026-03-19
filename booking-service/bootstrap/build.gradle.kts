@@ -25,30 +25,27 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.grpc:grpc-services")
     implementation("org.springframework.grpc:spring-grpc-client-spring-boot-starter")
     implementation("org.springframework.grpc:spring-grpc-server-spring-boot-starter")
     implementation("com.salary-app:grpc-contracts:1.0.0")
+    runtimeOnly("io.grpc:grpc-netty:1.73.0")
     runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
-    implementation(platform("org.springframework.cloud:spring-cloud-commons-dependencies:5.0.0"))
-    implementation("io.grpc:grpc-util:1.73.0")
 
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    implementation("org.springframework.boot:spring-boot-starter-r2dbc")
 
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-liquibase")
-    runtimeOnly("org.postgresql:postgresql")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     implementation(project(":model"))
     implementation(project(":application"))
     implementation(project(":adapter"))
+    implementation("org.postgresql:r2dbc-postgresql:1.1.1.RELEASE")
 }
 
 tasks.test {

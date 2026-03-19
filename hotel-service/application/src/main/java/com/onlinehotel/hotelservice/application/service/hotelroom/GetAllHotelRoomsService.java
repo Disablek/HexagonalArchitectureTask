@@ -5,8 +5,7 @@ import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRoomRe
 import com.onlinehotel.hotelservice.model.HotelRoom;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Set;
+import reactor.core.publisher.Flux;
 
 @Service
 @Transactional
@@ -18,7 +17,7 @@ public class GetAllHotelRoomsService implements GetAllHotelRoomsUseCase {
     }
 
     @Override
-    public Set<HotelRoom> execute() {
+    public Flux<HotelRoom> execute() {
         return hotelRoomRepositoryPort.findAll();
     }
 }

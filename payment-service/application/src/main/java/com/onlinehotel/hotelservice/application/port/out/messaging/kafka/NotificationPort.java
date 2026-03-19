@@ -6,5 +6,7 @@ import com.onlinehotel.hotelservice.application.dto.PaymentProceedEvent;
 public interface NotificationPort {
     void sendPaymentProceed(PaymentProceedEvent event);
 
-    void sendPaymentCreationFailed(PaymentFailedEvent event, Throwable ex);
+    void sendPaymentCreationFailed(PaymentFailedEvent event);
+
+    void sendPaymentCancelled(PaymentFailedEvent event);
 }

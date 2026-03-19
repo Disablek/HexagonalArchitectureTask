@@ -23,9 +23,15 @@ public class KafkaNotificationProducer implements NotificationPort {
     }
 
     @Override
-    public void sendPaymentCreationFailed(PaymentFailedEvent event, Throwable ex) {
-        log.warn("Couldn't create payment. Proceeding rollback", ex);
+    public void sendPaymentCreationFailed(PaymentFailedEvent event) {
+        log.warn("Couldn't create payment. Proceeding rollback");
         failedTemplate.send("payment-creating-failed", event.bookingId());
+    }
+
+    @Override
+    public void sendPaymentCancelled(PaymentFailedEvent event) {
+        log.info("{} has been cancelled", event.bookingId());
+        failedTemplate.send("payment-cancel", event.bookingId());
     }
 }
 

@@ -1,8 +1,8 @@
 package com.onlinehotel.hotelservice.application.port.in.hotel;
 
 import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
-import com.onlinehotel.hotelservice.model.Hotel;
+import reactor.core.publisher.Mono;
 
 public interface DeleteHotelUseCase {
-    void execute(Long id) throws HotelNotFoundException;
+    Mono<Void> execute(Long id) throws HotelNotFoundException;
 }

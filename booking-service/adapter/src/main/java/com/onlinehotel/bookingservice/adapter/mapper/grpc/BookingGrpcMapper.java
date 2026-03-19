@@ -21,15 +21,15 @@ public interface BookingGrpcMapper {
     @Mapping(target = "id", source = "bookingId")
     @Mapping(target = "hotelId", source = "hotelId")
     @Mapping(target = "hotelRoomId", source = "roomId")
-    @Mapping(target = "dateRange.checkIn", source = "checkInDate", dateFormat = "yyyy-MM-dd")
-    @Mapping(target = "dateRange.checkOut", source = "checkOutDate", dateFormat = "yyyy-MM-dd")
+    @Mapping(target = "checkIn", source = "checkInDate", dateFormat = "yyyy-MM-dd")
+    @Mapping(target = "checkOut", source = "checkOutDate", dateFormat = "yyyy-MM-dd")
     Booking toDomain(BookingRequest grpcRequest);
 
     @Mapping(target = "bookingId", source = "id")
     @Mapping(target = "hotelId", source = "hotelId")
     @Mapping(target = "roomId", source = "hotelRoomId")
-    @Mapping(target = "checkInDate", source = "dateRange.checkIn")
-    @Mapping(target = "checkOutDate", source = "dateRange.checkOut")
+    @Mapping(target = "checkInDate", source = "checkIn")
+    @Mapping(target = "checkOutDate", source = "checkOut")
     BookingRequest toGrpc(Booking domain);
 
     @Mapping(target = "bookingId", source = "id")

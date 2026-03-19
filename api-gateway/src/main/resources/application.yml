@@ -9,6 +9,16 @@ spring:
             locator:
               lower-case-service-id: true
               enabled: true
+          routes:
+            - id: BOOKING-SERVICE
+              uri: lb://BOOKING-SERVICE
+              predicates:
+                - Path=/api/booking/**
+            - id: hotel-service
+              uri: lb://HOTEL-SERVICE
+              predicates:
+                - Path=/api/**
+
 
 server:
   port: 8082
@@ -35,7 +45,7 @@ springdoc:
       - name: "Hotel Service"
         url: "/hotel-service/v3/api-docs"
       - name: "Booking Service"
-        url: "booking-service/v3/api-docs"
+        url: "/booking-service/v3/api-docs"
       - name: "Payment Service"
         url: "/payment-service/v3/api-docs"
 

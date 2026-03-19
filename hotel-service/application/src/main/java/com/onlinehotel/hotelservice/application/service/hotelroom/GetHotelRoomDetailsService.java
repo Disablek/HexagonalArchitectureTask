@@ -3,11 +3,10 @@ package com.onlinehotel.hotelservice.application.service.hotelroom;
 import com.onlinehotel.hotelservice.application.dto.HotelRoomDetailsDto;
 import com.onlinehotel.hotelservice.application.port.in.hotelroom.GetHotelRoomDetailsUseCase;
 import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRoomRepositoryPort;
-import com.onlinehotel.hotelservice.exception.HotelRoomNotFoundException;
-import com.onlinehotel.hotelservice.model.HotelRoom;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
 
 @Service
 @Transactional
@@ -17,13 +16,15 @@ public class GetHotelRoomDetailsService implements GetHotelRoomDetailsUseCase {
     private final HotelRoomRepositoryPort hotelRoomRepositoryPort;
 
     @Override
-    public HotelRoomDetailsDto details(Long roomId) {
-        HotelRoom hotelRoom = hotelRoomRepositoryPort.findById(roomId);
-        return HotelRoomDetailsDto.builder()
-                .price(hotelRoom.getPrice())
-                .serialNumber(hotelRoom.getSerialNumber())
-                .roomType(hotelRoom.getRoomType())
-                .capacity(hotelRoom.getCapacity())
-                .build();
+    public Mono<HotelRoomDetailsDto> details(Long roomId) {
+        return hotelRoomRepositoryPort.findById(roomId)
+                .flatMap( hotelRoom -> {
+                    return Mono.just(HotelRoomDetailsDto.builder()
+                            .price(hotelRoom != null ? hotelRoom.getPrice() : null)
+                            .serialNumber(hotelRoom != null ? hotelRoom.getSerialNumber() : null)
+                            .roomType(hotelRoom != null ? hotelRoom.getRoomType() : null)
+                            .capacity(hotelRoom != null ? hotelRoom.getCapacity() : null)
+                            .build());
+                });
     }
 }

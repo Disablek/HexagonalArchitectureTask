@@ -1,6 +1,7 @@
 package com.onlinehotel.bookingservice.application.port.out.grpc;
 
 import com.onlinehotel.bookingservice.application.dto.HotelRoomDetailsDto;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
@@ -12,5 +13,5 @@ public interface HotelRoomServicePort {
             LocalDate checkOut
     );
 
-    HotelRoomDetailsDto getHotelDetails(Long hotelId, Long roomId);
+    Mono<HotelRoomDetailsDto> getHotelDetails(Long hotelId, Long roomId);
 }

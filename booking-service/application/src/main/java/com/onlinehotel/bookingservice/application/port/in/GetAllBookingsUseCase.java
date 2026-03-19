@@ -1,9 +1,8 @@
 package com.onlinehotel.bookingservice.application.port.in;
 
 import com.onlinehotel.bookingservice.model.Booking;
-
-import java.util.Set;
+import reactor.core.publisher.Flux;
 
 public interface GetAllBookingsUseCase {
-    Set<Booking> execute();
+    Flux<Booking> execute();
 }

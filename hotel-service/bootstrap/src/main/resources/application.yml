@@ -1,20 +1,19 @@
 spring:
-
   application:
     name: hotel-service
-  datasource:
-    url: jdbc:postgresql://localhost:5432/hotel-service
-    username: postgres
-    password: pgpwd4habr
-    driver-class-name: org.postgresql.Driver
   cache:
     type: redis
-  liquibase:
-    change-log: classpath:/db/changelog/db.changelog-master.yaml
+#  liquibase:
+#    change-log: classpath:/db/changelog/db.changelog-master.yaml
 
   grpc:
     server:
       port: 0
+
+  r2dbc:
+    username: postgres
+    password: pgpwd4habr
+    url: r2dbc:postgresql://localhost:5432/hotel-service
 
 server:
   port: 0

@@ -47,6 +47,9 @@ protobuf {
 }
 
 dependencies {
+    // REDIS
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
 
     // gRPC
     implementation("io.grpc:grpc-services")
@@ -56,9 +59,10 @@ dependencies {
     runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("io.grpc:grpc-util:1.73.0")
-    // Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // Spring Boot R2DBC
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    implementation("org.springframework.boot:spring-boot-starter-r2dbc")
 
     // Kafka
     implementation("org.springframework.boot:spring-boot-starter-kafka")

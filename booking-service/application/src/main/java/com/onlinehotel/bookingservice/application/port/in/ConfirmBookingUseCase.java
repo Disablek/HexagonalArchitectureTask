@@ -1,5 +1,8 @@
 package com.onlinehotel.bookingservice.application.port.in;
 
+import com.onlinehotel.bookingservice.model.Booking;
+import reactor.core.publisher.Mono;
+
 public interface ConfirmBookingUseCase {
-    void confirmBooking(Long bookingId);
+    Mono<Booking> confirmBooking(Long bookingId);
 }

@@ -3,8 +3,10 @@ package com.onlinehotel.bookingservice.application.service;
 import com.onlinehotel.bookingservice.application.port.in.GetAllBookingsUseCase;
 import com.onlinehotel.bookingservice.application.port.out.persistence.BookingRepositoryPort;
 import com.onlinehotel.bookingservice.model.Booking;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
 
 import java.util.Set;
 
@@ -16,9 +18,10 @@ public class GetAllBookingService implements GetAllBookingsUseCase {
         this.bookingRepositoryPort = bookingRepositoryPort;
     }
 
+
     @Override
-    @Transactional
-    public Set<Booking> execute() {
+    public Flux<Booking> execute()
+    {
         return bookingRepositoryPort.findAll();
     }
 }

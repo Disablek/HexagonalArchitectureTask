@@ -2,26 +2,36 @@ package com.onlinehotel.bookingservice.application.service;
 
 import com.onlinehotel.bookingservice.application.port.in.CancelBookingUseCase;
 import com.onlinehotel.bookingservice.application.port.out.persistence.BookingRepositoryPort;
+import com.onlinehotel.bookingservice.exception.BookingNotFoundException;
 import com.onlinehotel.bookingservice.model.Booking;
 import com.onlinehotel.bookingservice.model.BookingStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.reactive.TransactionalOperator;
+import reactor.core.publisher.Mono;
 
 @Service
 public class CancelBookingService implements CancelBookingUseCase {
     private final BookingRepositoryPort bookingRepositoryPort;
+    private final TransactionalOperator transactionalOperator;
 
-    public CancelBookingService(BookingRepositoryPort bookingRepositoryPort) {
+    public CancelBookingService(BookingRepositoryPort bookingRepositoryPort, TransactionalOperator transactionalOperator) {
         this.bookingRepositoryPort = bookingRepositoryPort;
+        this.transactionalOperator = transactionalOperator;
     }
 
     @Override
-    @Transactional
-    @CachePut(value = "bookingCache", key = "#result.id")
-    public void execute(Long bookingId) {
-        Booking booking = bookingRepositoryPort.findById(bookingId);
-        booking.setBookingStatus(BookingStatus.CANCELLED);
-        bookingRepositoryPort.save(booking);
+    @CachePut(value = "bookingCache", key = "#bookingId")
+    public Mono<Booking> execute(Long bookingId) {
+        return transactionalOperator.transactional(
+                bookingRepositoryPort.findById(bookingId)
+                        .switchIfEmpty(Mono.error(
+                                new BookingNotFoundException("Booking not found with id: " + bookingId)))
+                        .flatMap(booking -> {
+                            booking.setBookingStatus(BookingStatus.CANCELLED);
+                            return bookingRepositoryPort.save(booking);
+                        }));
     }
+
 }

@@ -1,6 +1,5 @@
 package com.onlinehotel.bookingservice.adapter.config;
 
-import com.onlinehotel.bookingservice.adapter.out.messaging.event.DeleteBookingRequest;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -13,8 +12,6 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import org.springframework.kafka.support.converter.BatchMessagingMessageConverter;
-import org.springframework.kafka.support.converter.StringJacksonJsonMessageConverter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,46 +27,68 @@ public class KafkaConsumerConfig {
     private String kafkaGroupId;
 
     @Bean
-    public KafkaListenerContainerFactory<?> singleFactory() {
-        ConcurrentKafkaListenerContainerFactory<Long, DeleteBookingRequest> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
-        factory.setBatchListener(false);
-        return factory;
-    }
-
-    @Bean
-    public KafkaListenerContainerFactory<?> batchFactory() {
-        ConcurrentKafkaListenerContainerFactory<Long, DeleteBookingRequest> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
-        factory.setBatchListener(true);
-        return factory;
-    }
-
-    @Bean
-    public ConsumerFactory<Long, DeleteBookingRequest> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(consumerConfigs());
-    }
-
-    @Bean
-    public Map<String, Object> consumerConfigs() {
+    public ConsumerFactory<Long, Object> jsonConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaGroupId);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        return props;
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        return new DefaultKafkaConsumerFactory<>(props);
     }
 
     @Bean
-    public StringJacksonJsonMessageConverter converter() {
-        return new StringJacksonJsonMessageConverter();
+    public ConsumerFactory<Long, String> stringConsumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class); // Изменено
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaGroupId);
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        return new DefaultKafkaConsumerFactory<>(props);
     }
 
     @Bean
-    public BatchMessagingMessageConverter batchMessagingMessageConverter() {
-        return new BatchMessagingMessageConverter(converter());
+    public KafkaListenerContainerFactory<?> stringFactory() {
+        ConcurrentKafkaListenerContainerFactory<Long, String> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(stringConsumerFactory());
+        factory.setBatchListener(false);
+        return factory;
+    }
+
+
+    @Bean
+    public ConsumerFactory<Long, Long> longConsumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaGroupId);
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+        return new DefaultKafkaConsumerFactory<>(props);
+    }
+
+    @Bean
+    public KafkaListenerContainerFactory<?> jsonFactory() {
+        ConcurrentKafkaListenerContainerFactory<Long, Object> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(jsonConsumerFactory());
+        factory.setBatchListener(false);
+        return factory;
+    }
+
+    @Bean
+    public KafkaListenerContainerFactory<?> longFactory() {
+        ConcurrentKafkaListenerContainerFactory<Long, Long> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(longConsumerFactory());
+        factory.setBatchListener(false);
+        return factory;
     }
 }
+
+
+

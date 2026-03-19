@@ -297,14 +297,14 @@ public class HotelRoomGrpcService extends HotelRoomServiceGrpc.HotelRoomServiceI
     }
 }
 
-package com.onlinehotel.hotelservice.out.persistence.jpa;
+package com.onlinehotel.hotelservice.out.persistence.r2dbc;
 
 import com.onlinehotel.hotelservice.application.port.out.persistence.HotelRoomRepositoryPort;
 import com.onlinehotel.hotelservice.exception.HotelRoomNotFoundException;
 import com.onlinehotel.hotelservice.model.HotelRoom;
-import com.onlinehotel.hotelservice.out.persistence.jpa.mapper.HotelRoomMapper;
-import com.onlinehotel.hotelservice.out.persistence.jpa.model.HotelRoomJpaEntity;
-import com.onlinehotel.hotelservice.out.persistence.jpa.repository.HotelRoomJpaRepository;
+import com.onlinehotel.hotelservice.out.persistence.r2dbc.mapper.HotelRoomMapper;
+import com.onlinehotel.hotelservice.out.persistence.r2dbc.model.HotelRoomR2DBCEntity;
+import com.onlinehotel.hotelservice.out.persistence.r2dbc.repository.HotelRoomR2DBCRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -351,11 +351,11 @@ public class JpaHotelRoomAdapter implements HotelRoomRepositoryPort {
         return new HashSet<>(hotelRoomMapper.roomsToDomain(new HashSet<>(hotelRoomJpaRepository.findAll())));
     }
 }
-package com.onlinehotel.hotelservice.out.persistence.jpa.mapper;
+package com.onlinehotel.hotelservice.out.persistence.r2dbc.mapper;
 
 import com.onlinehotel.hotelservice.in.web.HotelRoomController;
 import com.onlinehotel.hotelservice.model.HotelRoom;
-import com.onlinehotel.hotelservice.out.persistence.jpa.model.HotelRoomJpaEntity;
+import com.onlinehotel.hotelservice.out.persistence.r2dbc.model.HotelRoomR2DBCEntity;
 import org.mapstruct.*;
 
 import java.util.Set;
@@ -395,7 +395,7 @@ public interface HotelRoomMapper {
     void updateEntityFromDomain(@MappingTarget HotelRoomJpaEntity entity, HotelRoom domain);
 }
 
-package com.onlinehotel.hotelservice.out.persistence.jpa.model;
+package com.onlinehotel.hotelservice.out.persistence.r2dbc.model;
 
 import com.onlinehotel.hotelservice.model.RoomType;
 import jakarta.persistence.*;

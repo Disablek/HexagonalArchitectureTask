@@ -29,13 +29,10 @@ public class PaymentEventConsumer {
         try {
             Payment createdPayment = createPaymentUseCase.execute(paymentKafkaMapper
                     .toDomain(dto));
-            if (createdPayment == null) {
-
-            }
         }
         catch (Exception ex) {
             notificationPort.sendPaymentCreationFailed(
-                    new PaymentFailedEvent(dto.getBookingId()), ex);
+                    new PaymentFailedEvent(dto.getBookingId()));
         }
     }
 

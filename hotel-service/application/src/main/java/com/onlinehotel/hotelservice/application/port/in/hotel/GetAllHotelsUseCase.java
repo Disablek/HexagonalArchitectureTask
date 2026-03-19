@@ -1,9 +1,8 @@
 package com.onlinehotel.hotelservice.application.port.in.hotel;
 
 import com.onlinehotel.hotelservice.model.Hotel;
-
-import java.util.Set;
+import reactor.core.publisher.Flux;
 
 public interface GetAllHotelsUseCase {
-    Set<Hotel> execute();
+    Flux<Hotel> execute();
 }

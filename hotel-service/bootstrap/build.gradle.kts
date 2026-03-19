@@ -30,7 +30,7 @@ dependencies {
     implementation("org.springframework.grpc:spring-grpc-server-spring-boot-starter")
     implementation("com.salary-app:grpc-contracts:1.0.0")
     runtimeOnly("io.grpc:grpc-netty:1.73.0")
-    //runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
+    runtimeOnly("io.grpc:grpc-netty-shaded:1.73.0")
 
 
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
@@ -42,7 +42,7 @@ dependencies {
     implementation(project(":model"))
     implementation(project(":application"))
     implementation(project(":adapter"))
-    runtimeOnly("org.postgresql:postgresql")
+    implementation("org.postgresql:r2dbc-postgresql:1.1.1.RELEASE")
 }
 
 tasks.test {

@@ -1,7 +1,9 @@
 package com.onlinehotel.hotelservice.adapter.in.rest;
 
 import com.onlinehotel.hotelservice.adapter.mapper.jpa.PaymentJpaMapper;
+import com.onlinehotel.hotelservice.application.dto.PaymentFailedEvent;
 import com.onlinehotel.hotelservice.application.port.in.*;
+import com.onlinehotel.hotelservice.application.port.out.messaging.kafka.NotificationPort;
 import com.onlinehotel.hotelservice.model.Payment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,6 +27,7 @@ public class PaymentController {
     private final PaymentInfoUseCase paymentInfoUseCase;
     private final ProceedPaymentUseCase proceedPaymentUseCase;
     private final PaymentJpaMapper paymentJpaMapper;
+    private final NotificationPort notificationPort;
 
     @DeleteMapping("/{paymentId}")
     @Operation(
@@ -33,6 +36,16 @@ public class PaymentController {
     )
     public ResponseEntity<Void> cancelPayment(@PathVariable("paymentId") Long paymentId) {
         cancelPaymentUseCase.cancelPayment(paymentId);
+        return ResponseEntity.ok().build();
+    }
+    @DeleteMapping("/{paymentId}/fail")
+    @Operation(
+            description = "Get all bookings",
+            summary = "Get all bookings parameters"
+    )
+    public ResponseEntity<Void> failPayment(@PathVariable("paymentId") Long paymentId) {
+        PaymentFailedEvent paymentFailedEvent = new PaymentFailedEvent(paymentId);
+        notificationPort.sendPaymentCreationFailed(paymentFailedEvent);
         return ResponseEntity.ok().build();
     }
 

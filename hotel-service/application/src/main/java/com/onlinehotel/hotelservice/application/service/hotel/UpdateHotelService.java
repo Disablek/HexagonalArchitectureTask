@@ -6,10 +6,9 @@ import com.onlinehotel.hotelservice.exception.HotelNotFoundException;
 import com.onlinehotel.hotelservice.model.Hotel;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
 
 @Service
-@Transactional
 public class UpdateHotelService implements UpdateHotelUseCase {
     private final HotelRepositoryPort hotelRepositoryPort;
 
@@ -19,20 +18,18 @@ public class UpdateHotelService implements UpdateHotelUseCase {
 
     @Override
     @CachePut(value = "hotelCache", key = "#id")
-    public Hotel execute(Long id, UpdateHotelCommand command) throws HotelNotFoundException {
-        Hotel hotel = hotelRepositoryPort.findById(id);
-        updatePartially(hotel, command);
-        return hotelRepositoryPort.save(hotel);
+    public Mono<Hotel> execute(Long id, UpdateHotelCommand command) {
+        return hotelRepositoryPort.findById(id)
+                .switchIfEmpty(Mono.error(new HotelNotFoundException("Hotel not found with id: " + id)))
+                .map(hotel -> applyPartialUpdate(hotel, command))
+                .flatMap(hotelRepositoryPort::save);
     }
 
-    private void updatePartially(Hotel hotel, UpdateHotelCommand cmd) {
-        if (cmd.name().isPresent())
-            hotel.setName(cmd.name().get());
-        if (cmd.address().isPresent())
-            hotel.setAddress(cmd.address().get());
-        if (cmd.hotelRoom().isPresent()){
-            hotel.getRooms().clear();
-            hotel.getRooms().addAll(cmd.hotelRoom().get());
-        }
+    private Hotel applyPartialUpdate(Hotel hotel, UpdateHotelCommand cmd) {
+        cmd.name().ifPresent(hotel::setName);
+        cmd.address().ifPresent(hotel::setAddress);
+
+        return hotel;
     }
 }
+
