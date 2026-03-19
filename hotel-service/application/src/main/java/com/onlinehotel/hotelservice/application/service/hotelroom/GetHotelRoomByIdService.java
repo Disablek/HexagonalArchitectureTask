@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 @Service
-@Transactional
 public class GetHotelRoomByIdService implements GetHotelRoomByIdUseCase {
     private final HotelRoomRepositoryPort hotelRoomRepositoryPort;
 

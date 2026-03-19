@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 @Service
-@Transactional
 public class GetHotelByIdService implements GetHotelByIdUseCase {
     private final HotelRepositoryPort hotelRepositoryPort;
 
@@ -20,7 +19,6 @@ public class GetHotelByIdService implements GetHotelByIdUseCase {
 
     @Override
     @Cacheable(value = "hotelCache", key = "#hotelId")
-    @Transactional(readOnly = true)
     public Mono<Hotel> execute(Long hotelId) throws HotelNotFoundException {
         return hotelRepositoryPort.findById(hotelId)
                 .switchIfEmpty(Mono.error(new HotelNotFoundException("Hotel not found with id: " + hotelId)));

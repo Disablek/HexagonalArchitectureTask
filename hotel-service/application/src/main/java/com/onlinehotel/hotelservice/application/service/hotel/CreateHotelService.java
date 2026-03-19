@@ -12,7 +12,6 @@ import reactor.core.publisher.Mono;
 import java.util.Objects;
 
 @Service
-@Transactional
 @AllArgsConstructor
 public class CreateHotelService implements CreateHotelUseCase {
 

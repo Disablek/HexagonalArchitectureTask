@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 
 @Service
-@Transactional
 public class GetAllHotelRoomsByHotelIdService implements GetAllHotelRoomsByHotelIdUseCase {
     private final HotelRoomRepositoryPort hotelRoomRepositoryPort;
 

@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 @Service
-@Transactional
 public class DeleteHotelService implements DeleteHotelUseCase {
     private final HotelRepositoryPort hotelRepositoryPort;
 

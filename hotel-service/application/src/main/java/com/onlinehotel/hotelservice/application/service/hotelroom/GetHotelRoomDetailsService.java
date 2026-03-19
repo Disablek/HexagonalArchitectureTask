@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 @Service
-@Transactional
 @AllArgsConstructor
 public class GetHotelRoomDetailsService implements GetHotelRoomDetailsUseCase {
 
